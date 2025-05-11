@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 export default function SidebarMenu() {
   const [open, setOpen] = useState(false);
-  const tabs = ["Цена Токена DBE", "Дорожная карта проекта", "О нас", "Контакты", "Чат бот Telegram"]
+  const tabs = ["Цена Токена DBE", "Дорожная карта проекта", "Токеномика токена  DBE", "О нас", "Контакты", "Чат бот Telegram"]
 
   const toggle = () => setOpen(prev => !prev);
 
@@ -20,7 +20,7 @@ export default function SidebarMenu() {
 
       {/* Боковая панель */}
       <div
-        className={`absolute top-[10px] left-0 h-full pl-[80px] w-[320px] bg-transparent text-white z-50 transform transition-transform duration-300 ${
+        className={`absolute top-[10px] left-0 h-full pl-[80px] w-[370px] bg-transparent text-white z-50 transform transition-transform duration-300 ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
