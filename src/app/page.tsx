@@ -3,7 +3,6 @@ import SidebarMenu from "@/components/SideBar";
 
 export default function Home() {
   const nav = ["ГЛАВНАЯ", "МИНИ БАНК", "СТАНДАРТ БАНК", "МЕГА БАНК"]
-  const buttons = [{name: "Войти", color: "gray"}, {name: "Регистрация", color: "purple"}]
 
   return (
     <>
@@ -23,19 +22,22 @@ export default function Home() {
           </ul>
         </nav>
         <div className={"flex flex-row p-[5px] gap-[10px]"}>
-          {buttons.map(({name, color}) => (
+          <div
+            className={"h-[50px] bg-gray-600 transition-all duration-300 hover:bg-gray-900 rounded-full flex justify-center items-center group"}>
             <div
-              key={name}
-              className={`h-[50px] bg-${color}-600 transition-all duration-300 hover:bg-${color}-900 rounded-full flex justify-center items-center group`}>
-              <div
-                className="text-white font-semibold transition-colors px-[10px]">{name}
-              </div>
+              className="text-white font-semibold transition-colors px-[10px]">Войти
             </div>
-          ))}
+          </div>
+          <div
+            className={`h-[50px] bg-purple-600 transition-all duration-300 hover:bg-purple-900 rounded-full flex justify-center items-center group`}>
+            <div
+              className="text-white font-semibold transition-colors px-[10px]">Регистрация
+            </div>
+          </div>
         </div>
       </header>
       <main>
-        <SidebarMenu />
+        <SidebarMenu/>
       </main>
     </>
   );
