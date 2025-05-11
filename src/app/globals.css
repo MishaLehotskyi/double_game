@@ -1,6 +1,38 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cal Sans';
+  src: url('/fonts/CalSans-Regular.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 body {
   background-color: #000;
   color: #fff;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold text-white;
+    font-family: 'Cal Sans', sans-serif;
+  }
+
+  p {
+    font-family: 'Bebas Neue', sans-serif;
+  }
 }

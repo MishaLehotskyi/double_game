@@ -11,14 +11,12 @@ export default function SidebarMenu() {
   const toggle = () => setOpen(prev => !prev);
 
   return (
-    <div className={"relative"}>
-      <div className={"flex flex-row pl-[20px] pt-[10px] gap-[10px]"}>
-        <button
-          onClick={toggle}
-          className={"z-51 h-[50px] w-[50px] bg-gray-600 cursor-pointer transition-all duration-300 hover:bg-gray-900 rounded-full flex justify-center items-center group"}>
-          {open ? <CloseIcon/> : <MenuIcon/>}
-        </button>
-      </div>
+    <div className={"relative w-[0px] h-[0px]"}>
+      <button
+        onClick={toggle}
+        className={"z-51 h-[50px] w-[50px] gap-[10px] bg-gray-600 cursor-pointer transition-all duration-300 hover:bg-gray-900 rounded-full flex justify-center items-center absolute top-[10px] left-[20px]"}>
+        {open ? <CloseIcon/> : <MenuIcon/>}
+      </button>
 
       {/* Боковая панель */}
       <div
