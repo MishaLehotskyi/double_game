@@ -11,7 +11,7 @@ export default function SidebarMenu() {
   const toggle = () => setOpen(prev => !prev);
 
   return (
-    <div className={"relative w-[0px] h-[0px]"}>
+    <div className={"relative w-[0px] h-[0px] hidden md:block"}>
       <button
         onClick={toggle}
         className={"z-51 h-[50px] w-[50px] gap-[10px] bg-gray-600 cursor-pointer transition-all duration-300 hover:bg-gray-900 rounded-full flex justify-center items-center absolute top-[10px] left-[20px]"}>
