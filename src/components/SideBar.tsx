@@ -3,10 +3,18 @@
 import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import Link from 'next/link';
 
 export default function SidebarMenu() {
   const [open, setOpen] = useState(false);
-  const tabs = ["Цена Токена DBE", "Дорожная карта проекта", "Токеномика токена  DBE", "О нас", "Контакты", "Чат бот Telegram"]
+  const tabs: { label: string; href: string }[] = [
+    { label: "Цена Токена DBE", href: "/price" },
+    { label: "Дорожная карта проекта", href: "/roadmap" },
+    { label: "Токеномика токена DBE", href: "/tokenomic" },
+    { label: "О нас", href: "/about" },
+    { label: "Контакты", href: "/contacts" },
+    { label: "Чат бот Telegram", href: "/telegram" },
+  ];
 
   const toggle = () => setOpen(prev => !prev);
 
@@ -25,8 +33,8 @@ export default function SidebarMenu() {
         }`}
       >
         <ul className="p-[10px] space-y-2 bg-gray-700 rounded-2xl">
-          {tabs.map((tab) => (
-            <li key={tab} className="bg-gray-900 hover:bg-gray-800 cursor-pointer rounded-2xl px-[10px] h-[30px] flex items-center">{tab}</li>
+          {tabs.map(({ label, href }) => (
+            <Link key={label} className="bg-gray-900 hover:bg-gray-800 cursor-pointer rounded-2xl px-[10px] h-[30px] flex items-center" href={href}>{label}</Link>
           ))}
         </ul>
       </div>

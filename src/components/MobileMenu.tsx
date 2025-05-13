@@ -2,8 +2,20 @@
 import {useEffect, useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import Link from "next/link";
 
-const navItems = ["ГЛАВНАЯ", "МИНИ БАНК", "СТАНДАРТ БАНК", "МЕГА БАНК", "Цена Токена DBE", "Дорожная карта проекта", "Токеномика токена  DBE", "О нас", "Контакты", "Чат бот Telegram"];
+const navItems: { label: string; href: string }[] = [
+  { label: "ГЛАВНАЯ", href: "/" },
+  { label: "МИНИ БАНК", href: "/mini-bank" },
+  { label: "СТАНДАРТ БАНК", href: "/standard-bank" },
+  { label: "МЕГА БАНК", href: "/mega-bank" },
+  { label: "Цена Токена DBE", href: "/price" },
+  { label: "Дорожная карта проекта", href: "/roadmap" },
+  { label: "Токеномика токена DBE", href: "/tokenomic" },
+  { label: "О нас", href: "/about" },
+  { label: "Контакты", href: "/contacts" },
+  { label: "Чат бот Telegram", href: "/telegram" },
+];
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -21,7 +33,6 @@ export default function MobileMenu() {
 
   return (
     <>
-      {/* Бургер-іконка */}
       <button
         className="md:hidden text-white"
         onClick={() => setOpen(true)}
@@ -29,10 +40,8 @@ export default function MobileMenu() {
         <MenuIcon />
       </button>
 
-      {/* Шторка */}
       {open && (
         <div className="fixed inset-0 bg-black bg-opacity-95 z-40 flex flex-col items-center justify-center gap-[10px] text-white text-xl">
-          {/* Закрити */}
           <button
             className="absolute top-[15px] right-[15px] text-white"
             onClick={() => setOpen(false)}
@@ -40,18 +49,17 @@ export default function MobileMenu() {
             <CloseIcon />
           </button>
 
-          {/* Пункти меню */}
-          {navItems.map((item) => (
-            <button
-              key={item}
+          {navItems.map(({ label, href }) => (
+            <Link
+              href={href}
+              key={label}
               className="hover:text-purple-500 transition text-base border rounded-full py-[5px] px-[10px] border-purple-900 shadow-[0_0_20px_5px_rgba(128,0,128,0.5)]"
               onClick={() => {
-                // зробити навігацію, якщо треба
                 setOpen(false);
               }}
             >
-              {item}
-            </button>
+              {label}
+            </Link>
           ))}
         </div>
       )}
