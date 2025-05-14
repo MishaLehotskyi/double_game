@@ -121,12 +121,16 @@ export default function Tokenomic() {
       <h1 className={"text-center pt-[15px] md:text-4xl"}>Токеномика DBE</h1>
       <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-purple-900"}>
         <li className={"md:text-xl text-base"}>Общее предложение 1000000</li>
-        <li className={"md:text-xl text-base"}>Нагальное предложение 50000</li>
-        <li className={"md:text-xl text-base"}>Публичная продажа 100000</li>
-        <li className={"md:text-xl text-base"}>Прогнозируемый пулл ликвидности 50000 - 300000, регулируется в зависимости от спроса</li>
+        <li className={"md:text-xl text-base"}>Начальное предложение 50000 ICO ( - 50 % для ранних инвесторов )</li>
+        <li className={"md:text-xl text-base"}>Маркетинг 50000</li>
+        <li className={"md:text-xl text-base"}>Публичная продажа Round 1 100000</li>
+        <li className={"md:text-xl text-base"}>Публичная продажа Round 2 100000</li>
+        <li className={"md:text-xl text-base"}>Прогнозируемый пулл ликвидности 50000 - 300000, регулируется в
+          зависимости от спроса
+        </li>
         <li className={"md:text-xl text-base"}>300000 стратегический запас</li>
       </ol>
-      <div className={"md:w-[720px] md:h-[720px]"} >
+      <div className={"md:w-[720px] md:h-[720px]"}>
         <Doughnut data={data} options={options} plugins={[arcLabelPlugin]} />
       </div>
     </div>
