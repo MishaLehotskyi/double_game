@@ -1,5 +1,5 @@
 'use client';
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import {
   Chart as ChartJS,
@@ -164,10 +164,17 @@ const nodes = [
 ];
 
 export default function Tokenomic() {
-  let isMobile = false
-  if (window.innerWidth < 700) {
-    isMobile = true
-  }
+  const [isMobile, setMobile] = useState<null | boolean>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 700) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  }, []);
+
+  if (isMobile === null) return null;
 
   return (
     <div className={"md:px-[80px] px-[10px] flex flex-col justify-center gap-[20px] items-center"}>
