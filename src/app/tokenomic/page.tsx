@@ -9,7 +9,29 @@ import {
   Title,
   Plugin, Chart,
 } from 'chart.js';
+import ReactFlow from 'reactflow';
+import 'reactflow/dist/style.css';
 import { Doughnut } from 'react-chartjs-2';
+import CustomNode from "@/components/CustomNode";
+import OneBotSource from "@/components/OneBotSource";
+import OneBotTarget from "@/components/OneBotTarget";
+import OneRightSource from "@/components/OneRightSource";
+import DoubleLeft from "@/components/DoubleLeft";
+import DoubleTop from "@/components/DoubleTop";
+import CustomNodeSecond from "@/components/CustomNodeSecond";
+import OneTopTarget from "@/components/OneTopTarget";
+
+
+const nodeTypes = {
+  custom: CustomNode,
+  oneBotSource: OneBotSource,
+  oneBotTarget: OneBotTarget,
+  oneRightSource: OneRightSource,
+  doubleLeft: DoubleLeft,
+  doubleTop: DoubleTop,
+  customSecond: CustomNodeSecond,
+  oneTopTarget: OneTopTarget,
+};
 
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
@@ -115,7 +137,38 @@ const options = {
   },
 };
 
+const edges = [
+  { id: 'e1-2', source: '1', target: '2', targetHandle: 'input-2', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e2-2', source: '2', target: '3', sourceHandle: 'input-3', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e4-2', source: '4', target: '2', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e5-2', source: '5', target: '2', sourceHandle: 'input-1', targetHandle: 'input-4', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e2-5', source: '2', target: '5', sourceHandle: 'input-5', targetHandle: 'input-2', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e2-6', source: '2', target: '6', sourceHandle: 'input-6', targetHandle: 'input-2', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e6-2', source: '6', target: '2', sourceHandle: 'input-1', targetHandle: 'input-7', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e7-2', label: '20%', source: '7', target: '2', sourceHandle: 'input-2', targetHandle: 'input-8', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e2-7', source: '2', target: '7', sourceHandle: 'input-9', targetHandle: 'input-1', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e7-8', source: '7', target: '8', sourceHandle: 'input-3', targetHandle: 'input-1', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e7-9', source: '7', target: '9', sourceHandle: 'input-4', targetHandle: 'input-1', markerEnd: { type: 'arrowclosed' }, animated: true, },
+];
+
+const nodes = [
+  { id: '1', type: 'oneBotSource', data: { label: 'Стейкинг' }, position: { x: 100, y: 50 } },
+  { id: '2', type: 'custom', data: { label: 'Пулл ликвидности' }, position: { x: 200, y: 150 } },
+  { id: '3', type: 'oneBotTarget', data: { label: 'Выплата % по стейкингу' }, position: { x: 320, y: 50 } },
+  { id: '4', type: 'oneRightSource', data: { label: 'Участники лотереи VRF' }, position: { x: 0, y: 150 } },
+  { id: '5', type: 'doubleLeft', data: { label: 'Держатели токена DBE' }, position: { x: 400, y: 150 } },
+  { id: '6', type: 'doubleTop', data: { label: 'DBE резерв' }, position: { x: 290, y: 230 } },
+  { id: '7', type: 'customSecond', data: { label: 'Лотерея VRF' }, position: { x: 200, y: 300 } },
+  { id: '8', type: 'oneTopTarget', data: { label: '70% призовые' }, position: { x: 100, y: 380 } },
+  { id: '9', type: 'oneTopTarget', data: { label: '10% продвижение проекта, команда' }, position: { x: 320, y: 380 } },
+];
+
 export default function Tokenomic() {
+  let isMobile = false
+  if (window.innerWidth < 700) {
+    isMobile = true
+  }
+
   return (
     <div className={"md:px-[80px] px-[10px] flex flex-col justify-center gap-[20px] items-center"}>
       <h1 className={"text-center pt-[15px] md:text-4xl"}>Токеномика DBE</h1>
@@ -132,6 +185,10 @@ export default function Tokenomic() {
       </ol>
       <div className={"md:w-[720px] md:h-[720px]"}>
         <Doughnut data={data} options={options} plugins={[arcLabelPlugin]} />
+      </div>
+      <div className={"md:w-[570px] md:h-[500px] relative w-[300px] h-[300px]"}>
+        <ReactFlow defaultViewport={{ x: 0, y: 0, zoom: isMobile ? 0.52 : 1 }} nodeTypes={nodeTypes} nodes={nodes} edges={edges} zoomOnScroll={false} zoomOnPinch={false} panOnDrag={true} panOnScroll={false} zoomActivationKeyCode={null} nodesDraggable={true} />
+        <div className={'absolute bottom-[0] h-[20px] w-full bg-black'} ></div>
       </div>
     </div>
   )
