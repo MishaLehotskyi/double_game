@@ -14,6 +14,7 @@ const eslintConfig = [
   {
     rules: {
       indent: ["error", 2],
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];
