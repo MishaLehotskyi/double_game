@@ -9,7 +9,7 @@ import {
   Title,
   Plugin, Chart,
 } from 'chart.js';
-import ReactFlow from 'reactflow';
+import ReactFlow, {MarkerType} from 'reactflow';
 import 'reactflow/dist/style.css';
 import { Doughnut } from 'react-chartjs-2';
 import CustomNode from "@/components/CustomNode";
@@ -138,17 +138,17 @@ const options = {
 };
 
 const edges = [
-  { id: 'e1-2', source: '1', target: '2', targetHandle: 'input-2', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e2-2', source: '2', target: '3', sourceHandle: 'input-3', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e4-2', source: '4', target: '2', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e5-2', source: '5', target: '2', sourceHandle: 'input-1', targetHandle: 'input-4', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e2-5', source: '2', target: '5', sourceHandle: 'input-5', targetHandle: 'input-2', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e2-6', source: '2', target: '6', sourceHandle: 'input-6', targetHandle: 'input-2', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e6-2', source: '6', target: '2', sourceHandle: 'input-1', targetHandle: 'input-7', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e7-2', label: '20%', source: '7', target: '2', sourceHandle: 'input-2', targetHandle: 'input-8', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e2-7', source: '2', target: '7', sourceHandle: 'input-9', targetHandle: 'input-1', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e7-8', source: '7', target: '8', sourceHandle: 'input-3', targetHandle: 'input-1', markerEnd: { type: 'arrowclosed' }, animated: true, },
-  { id: 'e7-9', source: '7', target: '9', sourceHandle: 'input-4', targetHandle: 'input-1', markerEnd: { type: 'arrowclosed' }, animated: true, },
+  { id: 'e1-2', source: '1', target: '2', targetHandle: 'input-2', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e2-2', source: '2', target: '3', sourceHandle: 'input-3', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e4-2', source: '4', target: '2', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e5-2', source: '5', target: '2', sourceHandle: 'input-1', targetHandle: 'input-4', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e2-5', source: '2', target: '5', sourceHandle: 'input-5', targetHandle: 'input-2', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e2-6', source: '2', target: '6', sourceHandle: 'input-6', targetHandle: 'input-2', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e6-2', source: '6', target: '2', sourceHandle: 'input-1', targetHandle: 'input-7', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e7-2', label: '20%', source: '7', target: '2', sourceHandle: 'input-2', targetHandle: 'input-8', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e2-7', source: '2', target: '7', sourceHandle: 'input-9', targetHandle: 'input-1', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e7-8', source: '7', target: '8', sourceHandle: 'input-3', targetHandle: 'input-1', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
+  { id: 'e7-9', source: '7', target: '9', sourceHandle: 'input-4', targetHandle: 'input-1', markerEnd: { type: MarkerType.ArrowClosed }, animated: true, },
 ];
 
 const nodes = [
