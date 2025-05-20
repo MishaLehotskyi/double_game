@@ -6,15 +6,24 @@ const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
 
 export default function MiniBank() {
   const { ref, inView } = useInView({
-    triggerOnce: true, // только один раз
-    threshold: 0.5,     // 50% блока в экране
+    triggerOnce: true,
+    threshold: 0.5,
   });
 
   const [playCounter, setPlayCounter] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  console.log(currentStep);
 
   useEffect(() => {
     if (inView) {
-      setPlayCounter(true);
+      setCurrentStep(prev => prev + 1);
+      setTimeout(() => {
+        setCurrentStep(prev => prev + 1);
+        setTimeout(() => {
+          setCurrentStep(prev => prev + 1);
+          setPlayCounter(true);
+        }, 1000)
+      }, 1000)
     }
   }, [inView]);
 
@@ -93,32 +102,39 @@ export default function MiniBank() {
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1 className={"text-center"} >Генератор выиграшных номеров ChainlinkVRF</h1>
-            <div
-              ref={ref}
-              className={"border border-purple-700 md:w-[650px] md:h-[200px] p-[10px] rounded-2xl overflow-x-hidden overflow-y-auto scrollbar-custom flex justify-evenly"}>
-              <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
-                <p className="text-[60px] text-yellow-500 font-bold px-[15px]">1</p>
-                {playCounter && (<SlotCounter
-                  value={8}
-                  duration={2}
-                  containerClassName="text-[60px] font-bold px-[15px]"
-                />)}
+            <div className={"w-[320px] md:w-[600px] flex flex-col border border-purple-700 rounded-2xl"} >
+              <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-purple-700"}>
+                {currentStep >=1 && (<p className={"text-[15px] md:text-[20px]"} >Идет запрос на ChainlinkVRF...</p>)}
+                {currentStep >=2 && (<p className={"text-[15px] md:text-[20px]"} >Chainlink выдал следующие числа: 8, 4, 9</p>)}
+                {currentStep >=3 && (<p className={"text-[15px] md:text-[20px]"} >Отображение результатов</p>)}
               </div>
-              <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
-                <p className="text-[60px] text-gray-400 font-bold px-[15px]">2</p>
-                {playCounter && (<SlotCounter
-                  value={4}
-                  duration={2}
-                  containerClassName="text-[60px] font-bold px-[15px]"
-                />)}
-              </div>
-              <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
-                <p className="text-[60px] text-amber-700 font-bold px-[15px]">3</p>
-                {playCounter && (<SlotCounter
-                  value={9}
-                  duration={2}
-                  containerClassName="text-[60px] font-bold px-[15px]"
-                />)}
+              <div
+                ref={ref}
+                className={"md:h-[200px] p-[10px] flex justify-evenly"}>
+                <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
+                  <p className="text-[60px] text-yellow-500 font-bold px-[15px]">1</p>
+                  {playCounter && (<SlotCounter
+                    value={8}
+                    duration={2}
+                    containerClassName="text-[60px] font-bold px-[15px]"
+                  />)}
+                </div>
+                <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
+                  <p className="text-[60px] text-gray-400 font-bold px-[15px]">2</p>
+                  {playCounter && (<SlotCounter
+                    value={4}
+                    duration={2}
+                    containerClassName="text-[60px] font-bold px-[15px]"
+                  />)}
+                </div>
+                <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
+                  <p className="text-[60px] text-amber-700 font-bold px-[15px]">3</p>
+                  {playCounter && (<SlotCounter
+                    value={9}
+                    duration={2}
+                    containerClassName="text-[60px] font-bold px-[15px]"
+                  />)}
+                </div>
               </div>
             </div>
           </div>
