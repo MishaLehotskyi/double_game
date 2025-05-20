@@ -36,3 +36,21 @@ body {
     font-family: 'Bebas Neue', sans-serif;
   }
 }
+
+@layer utilities {
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: white transparent; /* thumb track */
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: white;
+      border-radius: 8px;
+    }
+  }
+}
