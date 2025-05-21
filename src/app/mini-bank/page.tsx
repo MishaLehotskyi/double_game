@@ -21,7 +21,13 @@ export default function MiniBank() {
         setCurrentStep(prev => prev + 1);
         setTimeout(() => {
           setCurrentStep(prev => prev + 1);
-          setPlayCounter(true);
+          setTimeout(() => {
+            setCurrentStep(prev => prev + 1);
+            setTimeout(() => {
+              setCurrentStep(prev => prev + 1);
+              setPlayCounter(true);
+            }, 1000)
+          }, 1000)
         }, 1000)
       }, 1000)
     }
@@ -104,9 +110,14 @@ export default function MiniBank() {
             <h1 className={"text-center"} >Генератор выиграшных номеров ChainlinkVRF</h1>
             <div className={"w-[320px] md:w-[600px] flex flex-col border border-purple-700 rounded-2xl"} >
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-purple-700"}>
-                {currentStep >=1 && (<p className={"text-[15px] md:text-[20px]"} >Идет запрос на ChainlinkVRF...</p>)}
-                {currentStep >=2 && (<p className={"text-[15px] md:text-[20px]"} >Chainlink выдал следующие числа: 8, 4, 9</p>)}
-                {currentStep >=3 && (<p className={"text-[15px] md:text-[20px]"} >Отображение результатов</p>)}
+                {currentStep >=1 && (<p className={"text-[15px] md:text-[20px]"} >Шлем 3 запроса на ChainlinkVRF...</p>)}
+                {currentStep >=2 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Первое число 1. <a href={"https://bscscan.com/tx/0xae18ddfb738519db08dc143b1cde8338ddbd7870671c3ae525e80d57e28b4323"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Хэш транзакции</a></p>)}
+                {currentStep >=3 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Второе число 5. <a href={"https://bscscan.com/tx/0x4f66bdbae02cd4b8eecfad3b25f2ed2f733b67e772fbdbbeddba87f18a86220f"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Хэш транзакции</a></p>)}
+                {currentStep >=4 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Третье число 4. <a href={"https://bscscan.com/tx/0x5e2748bc9ad5f0c935558482f9b820abd57e670c25a991a1b7322e26d1f5e3b1"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Хэш транзакции</a></p>)}
+                {currentStep >= 5 && (<p className={"text-[15px] md:text-[20px]"}>Отображение результатов</p>)}
               </div>
               <div
                 ref={ref}
@@ -114,7 +125,7 @@ export default function MiniBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-yellow-500 font-bold px-[15px]">1</p>
                   {playCounter && (<SlotCounter
-                    value={8}
+                    value={1}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
@@ -122,7 +133,7 @@ export default function MiniBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-gray-400 font-bold px-[15px]">2</p>
                   {playCounter && (<SlotCounter
-                    value={4}
+                    value={5}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
@@ -130,7 +141,7 @@ export default function MiniBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-amber-700 font-bold px-[15px]">3</p>
                   {playCounter && (<SlotCounter
-                    value={9}
+                    value={4}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
