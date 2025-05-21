@@ -152,7 +152,7 @@ export default function MiniBank() {
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1 className={"text-center"}>Как проверить достоверность выигрышных чисел?</h1>
             <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-purple-900"}>
-              <li className={"md:text-xl text-base"}>Перейти по ссылке "Хэш транзакции"</li>
+              <li className={"md:text-xl text-base"}>{`Перейти по ссылке "Хэш транзакции"`}</li>
               <li className={"md:text-xl text-base"}>Кликнуть на вкладку Logs</li>
               <li className={"md:text-xl text-base"}>Посмотреть поле payment</li>
             </ol>
