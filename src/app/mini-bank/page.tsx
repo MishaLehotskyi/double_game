@@ -34,7 +34,7 @@ export default function MiniBank() {
   }, [inView]);
 
   return (
-    <div className={"md:px-[80px] md:pt-[40px] pt-[50px] px-[10px] flex flex-col justify-center gap-[20px] items-center"}>
+    <div className={"md:px-[80px] md:pt-[40px] pt-[50px] px-[10px] pb-[20px] flex flex-col justify-center gap-[20px] items-center"}>
       <div
         className={"border border-purple-700 rounded-2xl w-full md:py-[60px] py-[30px] flex flex-col items-center gap-[20px] relative"}>
         <div className={"flex justify-center absolute top-[-30px] bg-black"}>
@@ -51,7 +51,7 @@ export default function MiniBank() {
             <p className="text-[60px] font-bold border border-purple-700 rounded-2xl px-[15px]">5</p>
           </div>
         </div>
-        <div className={"flex flex-col justify-center items-center gap-[10px]"} >
+        <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"} >
           <h1>Строка новых участников</h1>
           <div
             className={"border border-purple-700 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
@@ -110,7 +110,7 @@ export default function MiniBank() {
             <h1 className={"text-center"} >Генератор выиграшных номеров ChainlinkVRF</h1>
             <div className={"w-[320px] md:w-[600px] flex flex-col border border-purple-700 rounded-2xl"} >
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-purple-700"}>
-                {currentStep >=1 && (<p className={"text-[15px] md:text-[20px]"} >Шлем 3 запроса на ChainlinkVRF...</p>)}
+                {currentStep >=1 && (<p className={"text-[15px] md:text-[20px]"} >Старт трех запросов CHAINLINK VRF...</p>)}
                 {currentStep >=2 && (
                   <p className={"text-[15px] md:text-[20px]"}>Первое число 1. <a href={"https://bscscan.com/tx/0xae18ddfb738519db08dc143b1cde8338ddbd7870671c3ae525e80d57e28b4323"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >=3 && (
@@ -148,6 +148,14 @@ export default function MiniBank() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className={"flex flex-col justify-center items-center gap-[10px]"}>
+            <h1 className={"text-center"}>Как проверить достоверность выигрышных чисел?</h1>
+            <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-purple-900"}>
+              <li className={"md:text-xl text-base"}>Перейти по ссылке "Хэш транзакции"</li>
+              <li className={"md:text-xl text-base"}>Кликнуть на вкладку Logs</li>
+              <li className={"md:text-xl text-base"}>Посмотреть поле payment</li>
+            </ol>
           </div>
         </div>
       </div>
