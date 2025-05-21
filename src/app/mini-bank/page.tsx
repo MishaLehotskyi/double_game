@@ -130,6 +130,7 @@ export default function MiniBank() {
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
                 </div>
+                <div className={"border border-purple-700 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-gray-400 font-bold px-[15px]">2</p>
                   {playCounter && (<SlotCounter
@@ -138,6 +139,7 @@ export default function MiniBank() {
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
                 </div>
+                <div className={"border border-purple-700 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-amber-700 font-bold px-[15px]">3</p>
                   {playCounter && (<SlotCounter
