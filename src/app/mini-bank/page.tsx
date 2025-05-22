@@ -121,7 +121,7 @@ export default function MiniBank() {
               </div>
               <div
                 ref={ref}
-                className={"md:h-[200px] p-[10px] flex justify-evenly"}>
+                className={"h-[200px] p-[10px] flex justify-evenly"}>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-yellow-500 font-bold px-[15px]">1</p>
                   {playCounter && (<SlotCounter
