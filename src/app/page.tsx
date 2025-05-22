@@ -44,7 +44,6 @@ export default function Home(){
       <p className={"text-center md:text-xl text-base"}>DoubelGame дает возможность участвовать в децентрализованной
         системе Лотерей без налогов и надзора с полностью прозрачной системой выбора победителя. А также быть держателем
         и инвестором токена DBE тем самым быть частично владельцем DeXe лотереи DoubelGame</p>
-      <RotatingModel />
     </div>
   );
 }
