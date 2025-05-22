@@ -2,7 +2,11 @@
 import React, {useEffect, useState} from "react";
 import dynamic from 'next/dynamic';
 import { useInView } from "react-intersection-observer";
+import ClickableTooltipInfo from "@/components/ClickableTooltipInfo";
 const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
+const RotatingModel = dynamic(() => import('@/components/RotatingModel'), {
+  ssr: false, // 3D работает только на клиенте
+});
 
 export default function MiniBank() {
   const { ref, inView } = useInView({
@@ -36,25 +40,30 @@ export default function MiniBank() {
   return (
     <div className={"md:px-[80px] md:pt-[40px] pt-[50px] px-[10px] pb-[20px] flex flex-col justify-center gap-[20px] items-center"}>
       <div
-        className={"border border-purple-700 rounded-2xl w-full md:py-[60px] py-[30px] flex flex-col items-center gap-[20px] relative"}>
-        <div className={"flex justify-center absolute top-[-30px] bg-black"}>
-          <h1 className={"text-center p-[10px] md:text-4xl border border-purple-700 w-fit rounded-full"}>Играть Mini
-            Bank</h1>
+        className={"border border-orange-500 rounded-2xl w-full md:py-[60px] py-[30px] flex flex-col items-center gap-[20px] relative"}>
+        <div className={"absolute hidden md:block top-[30px] left-[30px] h-[200px] w-[200px]"} >
+          <RotatingModel fileName={"mini.glb"} />
         </div>
-        <div className={"flex justify-evenly w-full"} >
+        <div className={"flex justify-center absolute top-[-30px] bg-black"}>
+          <h1 className={"text-center p-[10px] md:text-4xl border border-orange-500 w-fit rounded-full shadow-[0_0_20px_5px_rgba(255,0,0,0.5)] bg-orange-500"}>Играть Mini Bank <ClickableTooltipInfo /></h1>
+        </div>
+        <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1>Учасники</h1>
-            <p className="text-[60px] font-bold border border-purple-700 rounded-2xl px-[15px]">10</p>
+            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl px-[15px]">10</p>
+          </div>
+          <div className={"md:hidden h-[120px] w-[120px]"}>
+            <RotatingModel fileName={"mini.glb"} />
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1>Ваш номер</h1>
-            <p className="text-[60px] font-bold border border-purple-700 rounded-2xl px-[15px]">5</p>
+            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl px-[15px]">5</p>
           </div>
         </div>
-        <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"} >
+        <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>
           <h1>Строка новых участников</h1>
           <div
-            className={"border border-purple-700 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
+            className={"border border-orange-500 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
             <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
               <p>0xB2E0A4641F2CA075DC26BAB15dc1fAc88F017c0D</p>
               -
@@ -108,15 +117,15 @@ export default function MiniBank() {
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1 className={"text-center"} >Генератор выиграшных номеров ChainlinkVRF</h1>
-            <div className={"w-[320px] md:w-[600px] flex flex-col border border-purple-700 rounded-2xl"} >
-              <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-purple-700"}>
+            <div className={"w-[320px] md:w-[600px] flex flex-col border border-orange-500 rounded-2xl"} >
+              <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-orange-500"}>
                 {currentStep >=1 && (<p className={"text-[15px] md:text-[20px]"} >Старт трех запросов CHAINLINK VRF...</p>)}
                 {currentStep >=2 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Первое число 1. <a href={"https://bscscan.com/tx/0xae18ddfb738519db08dc143b1cde8338ddbd7870671c3ae525e80d57e28b4323"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Хэш транзакции</a></p>)}
+                  <p className={"text-[15px] md:text-[20px]"}>Первое число 1. <a href={"https://bscscan.com/tx/0xae18ddfb738519db08dc143b1cde8338ddbd7870671c3ae525e80d57e28b4323"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >=3 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Второе число 5. <a href={"https://bscscan.com/tx/0x4f66bdbae02cd4b8eecfad3b25f2ed2f733b67e772fbdbbeddba87f18a86220f"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Хэш транзакции</a></p>)}
+                  <p className={"text-[15px] md:text-[20px]"}>Второе число 5. <a href={"https://bscscan.com/tx/0x4f66bdbae02cd4b8eecfad3b25f2ed2f733b67e772fbdbbeddba87f18a86220f"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >=4 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Третье число 4. <a href={"https://bscscan.com/tx/0x5e2748bc9ad5f0c935558482f9b820abd57e670c25a991a1b7322e26d1f5e3b1"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Хэш транзакции</a></p>)}
+                  <p className={"text-[15px] md:text-[20px]"}>Третье число 4. <a href={"https://bscscan.com/tx/0x5e2748bc9ad5f0c935558482f9b820abd57e670c25a991a1b7322e26d1f5e3b1"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 5 && (<p className={"text-[15px] md:text-[20px]"}>Отображение результатов</p>)}
               </div>
               <div
@@ -130,7 +139,7 @@ export default function MiniBank() {
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
                 </div>
-                <div className={"border border-purple-700 h-full"}></div>
+                <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-gray-400 font-bold px-[15px]">2</p>
                   {playCounter && (<SlotCounter
@@ -139,7 +148,7 @@ export default function MiniBank() {
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
                 </div>
-                <div className={"border border-purple-700 h-full"}></div>
+                <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-amber-700 font-bold px-[15px]">3</p>
                   {playCounter && (<SlotCounter
@@ -153,7 +162,7 @@ export default function MiniBank() {
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1 className={"text-center"}>Как проверить достоверность выигрышных чисел?</h1>
-            <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-purple-900"}>
+            <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-orange-500"}>
               <li className={"md:text-xl text-base"}>{`Перейти по ссылке "Хэш транзакции"`}</li>
               <li className={"md:text-xl text-base"}>Кликнуть на вкладку Logs</li>
               <li className={"md:text-xl text-base"}>Посмотреть поле payment</li>

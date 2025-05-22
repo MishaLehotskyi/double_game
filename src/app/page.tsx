@@ -1,4 +1,9 @@
+'use client'
 import React from "react";
+import dynamic from 'next/dynamic';
+const RotatingModel = dynamic(() => import('@/components/RotatingModel'), {
+  ssr: false, // 3D работает только на клиенте
+});
 
 export default function Home(){
   return (
@@ -39,6 +44,7 @@ export default function Home(){
       <p className={"text-center md:text-xl text-base"}>DoubelGame дает возможность участвовать в децентрализованной
         системе Лотерей без налогов и надзора с полностью прозрачной системой выбора победителя. А также быть держателем
         и инвестором токена DBE тем самым быть частично владельцем DeXe лотереи DoubelGame</p>
+      <RotatingModel />
     </div>
   );
 }
