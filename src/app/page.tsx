@@ -1,9 +1,5 @@
 'use client'
 import React from "react";
-import dynamic from 'next/dynamic';
-const RotatingModel = dynamic(() => import('@/components/RotatingModel'), {
-  ssr: false, // 3D работает только на клиенте
-});
 
 export default function Home(){
   return (
