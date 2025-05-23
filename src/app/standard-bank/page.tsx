@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import { useInView } from "react-intersection-observer";
 import ClickableTooltipInfo from "@/components/ClickableTooltipInfo";
 import RotatingModel from "@/components/RotatingModel";
+import {IconButton, Tooltip} from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
 const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
 
 export default function StandardBank() {
@@ -11,10 +13,15 @@ export default function StandardBank() {
     triggerOnce: true,
     threshold: 0.5,
   });
+  const [open, setOpen] = useState(false);
+
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setOpen((prev) => !prev);
+  };
 
   const [playCounter, setPlayCounter] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
-  console.log(currentStep);
 
   useEffect(() => {
     if (inView) {
@@ -42,10 +49,32 @@ export default function StandardBank() {
         <div className={"absolute hidden md:block top-[30px] left-[30px] h-[200px] w-[200px]"}>
           <RotatingModel fileName={"standard.glb"}/>
         </div>
-        <div className={"flex justify-center absolute top-[-30px] bg-[#2a2a2a]"}>
+        <div className={"flex justify-center absolute top-[-30px] bg-[#2a2a2a] border border-green-600 w-fit rounded-full shadow-[0_0_20px_5px_rgba(0,255,0,0.5)] bg-green-700"}>
           <h1
-            className={"text-center p-[10px] md:text-4xl border border-green-600 w-fit rounded-full shadow-[0_0_20px_5px_rgba(0,255,0,0.5)] bg-green-700"}>Играть
-            Standard Bank <ClickableTooltipInfo info={"Для участия в лорее Standard Bank переведите 500 токенов DBE на адрес 0x0A59e974890265660BC9f3c2182e5cAA9c036723 Сеть BSC. После этого вы автоматически появитесь в окне участников с присвоенным номером билета"} /></h1>
+            onClick={handleClick}
+            className={"text-center cursor-pointer p-[10px] md:text-4xl"}>Играть
+            Standard Bank
+          </h1>
+          <Tooltip
+            open={open}
+            onClick={handleClick}
+            title={"Для участия в лорее Standard Bank переведите 500 токенов DBE на адрес 0x0A59e974890265660BC9f3c2182e5cAA9c036723 Сеть BSC. После этого вы автоматически появитесь в окне участников с присвоенным номером билета"}
+            disableFocusListener
+            disableHoverListener
+            disableTouchListener
+            arrow
+            componentsProps={{
+              tooltip: {
+                sx: {
+                  fontSize: '14px',
+                },
+              },
+            }}
+          >
+            <IconButton>
+              <InfoIcon sx={{ color: 'white' }} />
+            </IconButton>
+          </Tooltip>
         </div>
         <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
