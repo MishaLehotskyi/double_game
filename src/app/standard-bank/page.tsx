@@ -56,7 +56,7 @@ export default function StandardBank() {
             <RotatingModel fileName={"standard.glb"}/>
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <p>Ваш номер</p>
+            <p className={"text-base"} >Ваш номер</p>
             <p className="text-[60px] font-bold border border-green-600 rounded-2xl px-[15px]">5</p>
           </div>
         </div>
