@@ -14,16 +14,6 @@ const ClickableTooltipInfo = ({ info }: { info: string }) => {
     setOpen(false);
   };
 
-  React.useEffect(() => {
-    const handleClickOutside = () => {
-      setOpen(false);
-    };
-    window.addEventListener('click', handleClickOutside);
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
-
   return (
     <Tooltip
       open={open}
