@@ -44,7 +44,7 @@ export default function StandardBank() {
         </div>
         <div className={"flex justify-center absolute top-[-30px] bg-black"}>
           <h1
-            className={"text-center p-[10px] md:text-4xl border border-green-600 w-fit rounded-full shadow-[0_0_20px_5px_rgba(0,255,0,0.5)] bg-green-600"}>Играть
+            className={"text-center p-[10px] md:text-4xl border border-green-600 w-fit rounded-full shadow-[0_0_20px_5px_rgba(0,255,0,0.5)] bg-green-700"}>Играть
             Standard Bank <ClickableTooltipInfo/></h1>
         </div>
         <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
