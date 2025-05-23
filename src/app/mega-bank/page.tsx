@@ -151,14 +151,14 @@ export default function StandardBank() {
         </div>
         <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1>Учасники</h1>
+            <p>Учасники</p>
             <p className="text-[60px] font-bold border border-yellow-600 rounded-2xl px-[15px]">10</p>
           </div>
           <div className={"md:hidden h-[150px] w-[150px]"}>
             <RotatingModel fileName={"mega.glb"}/>
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1>Ваш номер</h1>
+            <p>Ваш номер</p>
             <p className="text-[60px] font-bold border border-yellow-600 rounded-2xl px-[15px]">5</p>
           </div>
         </div>
