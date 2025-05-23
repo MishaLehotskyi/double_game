@@ -192,7 +192,8 @@ export default function StandardBank() {
           </div>
         </div>
         <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>
-          <h1>Строка новых участников<ClickableTooltipInfo info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"} /></h1>
+          <h1 className={"text-xl md:text-3xl"} >Строка новых участников<ClickableTooltipInfo
+            info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"}/></h1>
           <div
             className={"border border-yellow-600 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
             {wallets.map((wallet, index) => (
@@ -204,7 +205,9 @@ export default function StandardBank() {
             ))}
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1 className={"text-center"}>Генератор выиграшных номеров ChainlinkVRF<ClickableTooltipInfo info={"Перейдите по ссылке Хеш Транзакции во вкладке LOGS Data requestld payment вы можете найти число сгенерированное Chainlink VRF"}/></h1>
+            <h1 className={"text-center text-xl md:text-3xl"}>Генератор выиграшных номеров ChainlinkVRF<ClickableTooltipInfo
+              info={"Перейдите по ссылке Хеш Транзакции во вкладке LOGS Data requestld payment вы можете найти число сгенерированное Chainlink VRF"}/>
+            </h1>
             <div className={"w-[320px] md:w-[600px] flex flex-col border border-yellow-600 rounded-2xl"}>
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-yellow-600"}>
                 {currentStep >= 1 && (
@@ -256,12 +259,37 @@ export default function StandardBank() {
             </div>
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1 className={"text-center"}>Как проверить достоверность выигрышных чисел?</h1>
+            <h1 className={"text-center text-xl md:text-3xl"}>Как проверить достоверность выигрышных чисел?</h1>
             <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-yellow-600"}>
               <li className={"md:text-xl text-base"}>{`Перейти по ссылке "Хэш транзакции"`}</li>
               <li className={"md:text-xl text-base"}>Кликнуть на вкладку Logs</li>
               <li className={"md:text-xl text-base"}>Посмотреть поле payment</li>
             </ol>
+          </div>
+          <div
+            className={"flex flex-col justify-center items-center gap-[30px] md:border-2 md:border-yellow-600 md:shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] p-[20px]"}>
+            <h1 className={"text-center text-yellow-600 "}>ВЫПЛАТЫ ПОБЕДИТЕЛЯМ</h1>
+            <div
+              className={"flex md:gap-[20px] gap-[12px] md:flex-row flex-col justify-center items-center md:items-stretch"}>
+              <p
+                className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-yellow-600 shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
+                1) Место: <a
+                  href={"https://bscscan.com/tx/0x7e5366025427c6cd9eabcb4accbf37377eb60b746ffa0a7351f9e058139e157b"}
+                  target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 30000 DBE
+              </p>
+              <p
+                className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-yellow-600 shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
+                2) Место: <a
+                  href={"https://bscscan.com/tx/0xa8bf4e75e97e054729c8b64ce20869008d710e3e3095677147f4c5572e501bc4"}
+                  target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 3500 DBE
+              </p>
+              <p
+                className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-yellow-600 shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
+                3) Место: <a
+                  href={"https://bscscan.com/tx/0xa8bf4e75e97e054729c8b64ce20869008d710e3e3095677147f4c5572e501bc4"}
+                  target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 1500 DBE
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -89,7 +89,8 @@ export default function MiniBank() {
           </div>
         </div>
         <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>
-          <h1>Строка новых участников<ClickableTooltipInfo info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"} /></h1>
+          <h1 className={"text-xl md:text-3xl"} >Строка новых участников<ClickableTooltipInfo
+            info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"}/></h1>
           <div
             className={"border border-orange-500 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
             <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
@@ -144,16 +145,25 @@ export default function MiniBank() {
             </div>
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1 className={"text-center"} >Генератор выиграшных номеров ChainlinkVRF<ClickableTooltipInfo info={"Перейдите по ссылке Хеш Транзакции во вкладке LOGS Data requestld payment вы можете найти число сгенерированное Chainlink VRF"} /></h1>
-            <div className={"w-[320px] md:w-[600px] flex flex-col border border-orange-500 rounded-2xl"} >
+            <h1 className={"text-center w-[320px] md:w-full text-xl md:text-3xl"}>Генератор выиграшных номеров ChainlinkVRF<ClickableTooltipInfo
+              info={"Перейдите по ссылке Хеш Транзакции во вкладке LOGS Data requestld payment вы можете найти число сгенерированное Chainlink VRF"}/>
+            </h1>
+            <div className={"w-[320px] md:w-[600px] flex flex-col border border-orange-500 rounded-2xl"}>
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-orange-500"}>
-                {currentStep >=1 && (<p className={"text-[15px] md:text-[20px]"} >Старт трех запросов CHAINLINK VRF...</p>)}
-                {currentStep >=2 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Первое число 1. <a href={"https://bscscan.com/tx/0xae18ddfb738519db08dc143b1cde8338ddbd7870671c3ae525e80d57e28b4323"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
-                {currentStep >=3 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Второе число 5. <a href={"https://bscscan.com/tx/0x4f66bdbae02cd4b8eecfad3b25f2ed2f733b67e772fbdbbeddba87f18a86220f"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
-                {currentStep >=4 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Третье число 4. <a href={"https://bscscan.com/tx/0x5e2748bc9ad5f0c935558482f9b820abd57e670c25a991a1b7322e26d1f5e3b1"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
+                {currentStep >= 1 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Старт трех запросов CHAINLINK VRF...</p>)}
+                {currentStep >= 2 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Первое число 1. <a
+                    href={"https://bscscan.com/tx/0xae18ddfb738519db08dc143b1cde8338ddbd7870671c3ae525e80d57e28b4323"}
+                    target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
+                {currentStep >= 3 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Второе число 5. <a
+                    href={"https://bscscan.com/tx/0x4f66bdbae02cd4b8eecfad3b25f2ed2f733b67e772fbdbbeddba87f18a86220f"}
+                    target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
+                {currentStep >= 4 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Третье число 4. <a
+                    href={"https://bscscan.com/tx/0x5e2748bc9ad5f0c935558482f9b820abd57e670c25a991a1b7322e26d1f5e3b1"}
+                    target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 5 && (<p className={"text-[15px] md:text-[20px]"}>Отображение результатов</p>)}
               </div>
               <div
@@ -189,12 +199,30 @@ export default function MiniBank() {
             </div>
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1 className={"text-center"}>Как проверить достоверность выигрышных чисел?</h1>
+            <h1 className={"text-center text-xl md:text-3xl"}>Как проверить достоверность выигрышных чисел?</h1>
             <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-orange-500"}>
               <li className={"md:text-xl text-base"}>{`Перейти по ссылке "Хэш транзакции"`}</li>
               <li className={"md:text-xl text-base"}>Кликнуть на вкладку Logs</li>
               <li className={"md:text-xl text-base"}>Посмотреть поле payment</li>
             </ol>
+          </div>
+          <div className={"flex flex-col justify-center items-center gap-[30px] md:border-2 md:border-orange-500 md:shadow-[0_0_20px_5px_rgba(255,0,0,0.5)] p-[20px]"}>
+            <h1 className={"text-center text-orange-500"}>ВЫПЛАТЫ ПОБЕДИТЕЛЯМ</h1>
+            <div
+              className={"flex md:gap-[20px] gap-[12px] md:flex-row flex-col justify-center items-center md:items-stretch"}>
+              <p
+                className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-orange-500 shadow-[0_0_20px_5px_rgba(255,0,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
+                1) Место: <a href={"https://bscscan.com/tx/0x7e5366025427c6cd9eabcb4accbf37377eb60b746ffa0a7351f9e058139e157b"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a> Сумма: 600 DBE
+              </p>
+              <p
+                className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-orange-500 shadow-[0_0_20px_5px_rgba(255,0,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
+                2) Место: <a href={"https://bscscan.com/tx/0xa8bf4e75e97e054729c8b64ce20869008d710e3e3095677147f4c5572e501bc4"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a> Сумма: 70 DBE
+              </p>
+              <p
+                className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-orange-500 shadow-[0_0_20px_5px_rgba(255,0,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
+                3) Место: <a href={"https://bscscan.com/tx/0xa8bf4e75e97e054729c8b64ce20869008d710e3e3095677147f4c5572e501bc4"} target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a> Сумма: 30 DBE
+              </p>
+            </div>
           </div>
         </div>
       </div>
