@@ -40,7 +40,7 @@ export default function StandardBank() {
       <div
         className={"border border-green-600 rounded-2xl w-full md:py-[60px] py-[30px] flex flex-col items-center gap-[20px] relative"}>
         <div className={"absolute hidden md:block top-[30px] left-[30px] h-[200px] w-[200px]"}>
-          <RotatingModel fileName={"std.glb"}/>
+          <RotatingModel fileName={"standard.glb"}/>
         </div>
         <div className={"flex justify-center absolute top-[-30px] bg-black"}>
           <h1
