@@ -22,10 +22,6 @@ export default function MiniBank() {
     setOpen((prev) => !prev);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const [playCounter, setPlayCounter] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
