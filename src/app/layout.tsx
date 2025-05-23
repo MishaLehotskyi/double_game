@@ -51,10 +51,8 @@ export default function RootLayout({
             <ul className={"flex flex-row gap-[50px]"}>
               {nav.map(({label, href}) => (
                 <Link href={href} key={label}
-                  className={"relative group cursor-pointer transition-all duration-300 hover:text-purple-900"}>
+                  className={"relative group cursor-pointer transition-all duration-300 hover:text-purple-500 border rounded-full p-[10px] border-purple-900 shadow-[0_0_20px_5px_rgba(128,0,128,0.5)]"}>
                   {label}
-                  <span
-                    className="absolute left-0 bottom-0 w-0 h-[2px] bg-purple-900 transition-all duration-300 group-hover:w-full"/>
                 </Link>
               ))}
             </ul>
