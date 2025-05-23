@@ -1,10 +1,53 @@
 'use client'
-import React from "react";
+import React, {useState} from "react";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 export default function Home(){
+  const [copied, setCopied] = useState<boolean>(false);
+
+  const handleCopy = (value: string) => {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(value).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      }).catch(() => fallbackCopyText(value));
+    } else {
+      fallbackCopyText(value);
+    }
+  };
+
+  const fallbackCopyText = (text: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      }
+    } catch (err) {
+      console.error('Fallback: Copy failed', err);
+    }
+
+    document.body.removeChild(textarea);
+  };
+
   return (
     <div className={"md:px-[80px] px-[10px] flex flex-col justify-center gap-[20px]"}>
-      <h1 className={"text-center pt-[15px] md:text-4xl"}>DoubelGame это прозрачная и открытая DeXe лотерея, где победителей выбирает генератор случайных чисел <a href={"https://docs.chain.link/vrf"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Chainlink VRF</a></h1><p className={"text-center"}><a href={"https://docs.chain.link/vrf"} target={"_blank"} className={"text-purple-700 cursor-pointer"}>Chainlink VRF</a> полностью исключает манипуляции и вмешательства в выбор победителя</p>
+      <h1 className={"text-center pt-[15px] md:text-4xl"}>DoubelGame это прозрачная и открытая DeXe лотерея, где
+        победителей выбирает генератор случайных чисел <a href={"https://docs.chain.link/vrf"} target={"_blank"}
+        className={"text-purple-700 cursor-pointer"}>Chainlink VRF</a>
+      </h1><p className={"text-center"}><a href={"https://docs.chain.link/vrf"} target={"_blank"}
+        className={"text-purple-700 cursor-pointer"}>Chainlink VRF</a> полностью
+      исключает манипуляции и вмешательства в выбор победителя</p>
       <h1 className={"text-center"}>ПОЧЕМУ DoubelGame?</h1>
       <div
         className={"flex md:gap-[20px] gap-[12px] md:flex-row flex-col justify-center items-center md:items-stretch"}>
@@ -40,6 +83,30 @@ export default function Home(){
       <p className={"text-center md:text-xl text-base"}>DoubelGame дает возможность участвовать в децентрализованной
         системе Лотерей без налогов и надзора с полностью прозрачной системой выбора победителя. А также быть держателем
         и инвестором токена DBE тем самым быть частично владельцем DeXe лотереи DoubelGame</p>
+      <div
+        className="flex justify-end w-full"
+      >
+        <div className="flex items-center gap-4 md:w-[320px] w-full md:text-xl text-base">
+          Почта админа:
+          <a
+            href={"https://mailto:doubellgame@gmail.com"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-purple-600 transition-colors md:text-xl text-base"
+          >
+            doubellgame@gmail.com
+          </a>
+        </div>
+        <Tooltip title={copied ? 'Copied!' : 'Copy'}>
+          <IconButton
+            onClick={() => handleCopy("doubellgame@gmail.com")}
+            size="small"
+            sx={{color: '#6b7280'}}
+          >
+            <ContentCopyIcon fontSize="small"/>
+          </IconButton>
+        </Tooltip>
+      </div>
     </div>
   );
 }
