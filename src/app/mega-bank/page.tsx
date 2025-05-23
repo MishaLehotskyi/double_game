@@ -5,6 +5,108 @@ import { useInView } from "react-intersection-observer";
 import ClickableTooltipInfo from "@/components/ClickableTooltipInfo";
 import RotatingModel from "@/components/RotatingModel";
 const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
+const wallets = [
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E00",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E01",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E02",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E03",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E04",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E05",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E06",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E07",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E08",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E09",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0a",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0b",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0c",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0d",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0e",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0f",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E10",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E11",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E12",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E13",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E14",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E15",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E16",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E17",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E18",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E19",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1a",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1b",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1c",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1d",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1e",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1f",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E20",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E21",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E22",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E23",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E24",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E25",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E26",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E27",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E28",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E29",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2a",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2b",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2c",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2d",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2e",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2f",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E30",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E31",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E32",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E33",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E34",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E35",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E36",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E37",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E38",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E39",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3a",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3b",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3c",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3d",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3e",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3f",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E40",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E41",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E42",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E43",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E44",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E45",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E46",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E47",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E48",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E49",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4a",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4b",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4c",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4d",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4e",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4f",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E50",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E51",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E52",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E53",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E54",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E55",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E56",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E57",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E58",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E59",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5a",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5b",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5c",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5d",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5e",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5f",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E60",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E61",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E62",
+  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E63"
+]
 
 export default function StandardBank() {
   const { ref, inView } = useInView({
@@ -64,56 +166,13 @@ export default function StandardBank() {
           <h1>Строка новых участников</h1>
           <div
             className={"border border-yellow-600 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xB2E0A4641F2CA075DC26BAB15dc1fAc88F017c0D</p>
-              -
-              <p>№ 4</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x3A9F53aA378bbDAA8E9C775942D4D8B8Ef7Fb92C</p>
-              -
-              <p>№ 6</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x1B4D7c960eE0D4998625F9F24DfA1769e8419D2D</p>
-              -
-              <p>№ 7</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xE618fC29d4098773Fc7f99b16849bAA9a2785A7A</p>
-              -
-              <p>№ 8</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x8aF23845a4c2077e09c64066F20e213243F85Db9</p>
-              -
-              <p>№ 9</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6EdA</p>
-              -
-              <p>№ 5</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x490FA1b7E4aDbDc77A7C3d9D8c14a37a6bC0Af2c</p>
-              -
-              <p>№ 3</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xd1C50B3Bd70C3BAEAFdDe21D558A878ABDf8aAbC</p>
-              -
-              <p>№ 1</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x490FA1b7E4aDbDc77A7C3d9D8c14a37a6bC0Af2c</p>
-              -
-              <p>№ 2</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6EdA</p>
-              -
-              <p>№ 10</p>
-            </div>
+            {wallets.map((wallet, index) => (
+              <div key={wallet} className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
+                <p>{wallet}</p>
+                -
+                <p>№ {index + 1}</p>
+              </div>
+            ))}
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1 className={"text-center"}>Генератор выиграшных номеров ChainlinkVRF</h1>
@@ -122,16 +181,16 @@ export default function StandardBank() {
                 {currentStep >= 1 && (
                   <p className={"text-[15px] md:text-[20px]"}>Старт трех запросов CHAINLINK VRF...</p>)}
                 {currentStep >= 2 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Первое число 1. <a
-                    href={"https://bscscan.com/tx/0xae18ddfb738519db08dc143b1cde8338ddbd7870671c3ae525e80d57e28b4323"}
+                  <p className={"text-[15px] md:text-[20px]"}>Первое число 59. <a
+                    href={"https://bscscan.com/tx/0xb318e6b7104706eb4c71aa1dcd30d5b8ebc7f709de2d328f6fcb5c3e36b20822"}
                     target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 3 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Второе число 5. <a
-                    href={"https://bscscan.com/tx/0x4f66bdbae02cd4b8eecfad3b25f2ed2f733b67e772fbdbbeddba87f18a86220f"}
+                  <p className={"text-[15px] md:text-[20px]"}>Второе число 86. <a
+                    href={"https://bscscan.com/tx/0xb7f04a3a11f4a3061944215dfe46c28685f1968ec1d11bbff331ac81bbb387b3"}
                     target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 4 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Третье число 4. <a
-                    href={"https://bscscan.com/tx/0x5e2748bc9ad5f0c935558482f9b820abd57e670c25a991a1b7322e26d1f5e3b1"}
+                  <p className={"text-[15px] md:text-[20px]"}>Третье число 81. <a
+                    href={"https://bscscan.com/tx/0x648e13fb3a0305e135ca62460dbf47492d8404b52a83ca8083698354e5c32064"}
                     target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 5 && (<p className={"text-[15px] md:text-[20px]"}>Отображение результатов</p>)}
               </div>
@@ -141,7 +200,7 @@ export default function StandardBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-yellow-500 font-bold px-[15px]">1</p>
                   {playCounter && (<SlotCounter
-                    value={1}
+                    value={59}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
@@ -150,7 +209,7 @@ export default function StandardBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-gray-400 font-bold px-[15px]">2</p>
                   {playCounter && (<SlotCounter
-                    value={5}
+                    value={86}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
@@ -159,7 +218,7 @@ export default function StandardBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-amber-700 font-bold px-[15px]">3</p>
                   {playCounter && (<SlotCounter
-                    value={4}
+                    value={81}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
