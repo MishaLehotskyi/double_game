@@ -57,13 +57,13 @@ export default function Home(){
         </p>
         <p
           className={"md:w-[300px] w-[360px] md:text-xl text-base border border-purple-600 rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>Покупать
-          токены получать номер от 1-100 билета отображаемый в строке участников</p>
+          токены получать номер от 1 до 10 или от 1 до 100 билета отображаемый в строке участников</p>
         <p
           className={"md:w-[300px] w-[360px] md:text-xl text-base border border-purple-600 rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>Лотерея
-          проходит сразу как набирается 100 участников</p>
+          проходит сразу как набирается 10 или 100 участников</p>
         <p
           className={"md:w-[300px] w-[360px] md:text-xl text-base border border-purple-600 rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>Подается
-          запрос на Chainlink VRF генерирует 3 случайных числа от 1 до 100 тем самым выдает выигрышные номера.</p>
+          запрос на Chainlink VRF генерирует 3 случайных числа от 1 до 10 или от 1 до 100 тем самым выдает выигрышные номера.</p>
       </div>
       <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-purple-900"}>
         <li className={"md:text-xl text-base"}>Первое выпавшее число это 1 победитель забирающий 60% от банка</li>
