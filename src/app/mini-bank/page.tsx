@@ -78,14 +78,14 @@ export default function MiniBank() {
         <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <p>Учасники</p>
-            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl px-[15px]">10</p>
+            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">10</p>
           </div>
           <div className={"md:hidden h-[150px] w-[150px]"}>
             <RotatingModel fileName={"mini.glb"} />
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <p className={"text-base"} >Ваш номер</p>
-            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl px-[15px]">5</p>
+            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">5</p>
           </div>
         </div>
         <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>

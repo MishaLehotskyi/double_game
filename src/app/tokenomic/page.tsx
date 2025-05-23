@@ -195,7 +195,7 @@ export default function Tokenomic() {
       </div>
       <div className={"md:w-[570px] md:h-[500px] relative w-[300px] h-[300px]"}>
         <ReactFlow defaultViewport={{ x: 0, y: 0, zoom: isMobile ? 0.52 : 1 }} nodeTypes={nodeTypes} nodes={nodes} edges={edges} zoomOnScroll={false} zoomOnPinch={false} panOnDrag={true} panOnScroll={false} zoomActivationKeyCode={null} nodesDraggable={true} />
-        <div className={'absolute bottom-[0] h-[20px] w-full bg-black'} ></div>
+        <div className={'absolute bottom-[0] h-[20px] w-full bg-[#2a2a2a]'} ></div>
       </div>
     </div>
   )
