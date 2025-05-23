@@ -44,8 +44,8 @@ export default function MiniBank() {
         <div className={"absolute hidden md:block top-[30px] left-[30px] h-[200px] w-[200px]"} >
           <RotatingModel fileName={"mini.glb"} />
         </div>
-        <div className={"flex justify-center absolute top-[-30px] bg-black"}>
-          <h1 className={"text-center p-[10px] md:text-4xl border border-orange-500 w-fit rounded-full shadow-[0_0_20px_5px_rgba(255,0,0,0.5)] bg-orange-500"}>Играть Mini Bank <ClickableTooltipInfo /></h1>
+        <div className={"flex justify-center absolute top-[-30px] bg-[#2a2a2a]"}>
+          <h1 className={"text-center p-[10px] md:text-4xl border border-orange-500 w-fit rounded-full shadow-[0_0_20px_5px_rgba(255,0,0,0.5)] bg-orange-500"}>Играть Mini Bank <ClickableTooltipInfo info={"Для участия в лорее Mini Bank переведите 100 токенов DBE на адрес 0x62939d201C1c4beFbA34A1DFE85f35B64bc1BcfB Сеть BSC. После этого вы автоматически появитесь в окне участников с присвоенным номером билета"} /></h1>
         </div>
         <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
@@ -61,7 +61,7 @@ export default function MiniBank() {
           </div>
         </div>
         <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>
-          <h1>Строка новых участников</h1>
+          <h1>Строка новых участников<ClickableTooltipInfo info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"} /></h1>
           <div
             className={"border border-orange-500 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
             <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
@@ -116,7 +116,7 @@ export default function MiniBank() {
             </div>
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1 className={"text-center"} >Генератор выиграшных номеров ChainlinkVRF</h1>
+            <h1 className={"text-center"} >Генератор выиграшных номеров ChainlinkVRF<ClickableTooltipInfo info={"Перейдите по ссылке Хеш Транзакции во вкладке LOGS Data requestld payment вы можете найти число сгенерированное Chainlink VRF"} /></h1>
             <div className={"w-[320px] md:w-[600px] flex flex-col border border-orange-500 rounded-2xl"} >
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-orange-500"}>
                 {currentStep >=1 && (<p className={"text-[15px] md:text-[20px]"} >Старт трех запросов CHAINLINK VRF...</p>)}

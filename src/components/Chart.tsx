@@ -11,15 +11,14 @@ interface GeckoTerminalChartProps {
 const GeckoTerminalChart: React.FC<GeckoTerminalChartProps> = ({
   src,
   title = 'GeckoTerminal Chart',
-  height = '1500px',
 }) => {
   return (
     <iframe
       src={src}
       title={title}
       width="100%"
-      height={height}
-      style={{ border: 'none' }}
+      height="100%"
+      style={{ border: 'none', overflowY: 'scroll', height: 'calc(100vh - 60px)' }}
       allowFullScreen
     />
   );

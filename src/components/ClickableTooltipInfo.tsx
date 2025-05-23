@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Tooltip, IconButton } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 
-const ClickableTooltipInfo = () => {
+const ClickableTooltipInfo = ({ info }: { info: string }) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = (event: React.MouseEvent) => {
@@ -28,7 +28,7 @@ const ClickableTooltipInfo = () => {
     <Tooltip
       open={open}
       onClose={handleClose}
-      title="Переходите по ссылке (силка будет когда токен залистенным) покупаете 100 токенов DBE после чего вы автоматически появляетесь в строке участников и получаете свой номер Билета. Ваш номер билета указан напротив вашего адреса кошелька."
+      title={info}
       disableFocusListener
       disableHoverListener
       disableTouchListener

@@ -144,10 +144,10 @@ export default function StandardBank() {
         <div className={"absolute hidden md:block top-[30px] left-[30px] h-[200px] w-[200px]"}>
           <RotatingModel fileName={"mega.glb"}/>
         </div>
-        <div className={"flex justify-center absolute top-[-30px] bg-black"}>
+        <div className={"flex justify-center absolute top-[-30px] bg-[#2a2a2a]"}>
           <h1
             className={"text-center p-[10px] md:text-4xl border border-yellow-600 w-fit rounded-full shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] bg-yellow-600"}>Играть
-            Mega Bank <ClickableTooltipInfo/></h1>
+            Mega Bank <ClickableTooltipInfo info={"Для участия в лорее Mega Bank переведите 500 токенов DBE на адрес 0x740B45a8E7C01AAFC6CD823e5a794F172eE9cCD0 Сеть BSC. После этого вы автоматически появитесь в окне участников с присвоенным номером билета"} /></h1>
         </div>
         <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
@@ -163,7 +163,7 @@ export default function StandardBank() {
           </div>
         </div>
         <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>
-          <h1>Строка новых участников</h1>
+          <h1>Строка новых участников<ClickableTooltipInfo info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"} /></h1>
           <div
             className={"border border-yellow-600 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
             {wallets.map((wallet, index) => (
@@ -175,7 +175,7 @@ export default function StandardBank() {
             ))}
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1 className={"text-center"}>Генератор выиграшных номеров ChainlinkVRF</h1>
+            <h1 className={"text-center"}>Генератор выиграшных номеров ChainlinkVRF<ClickableTooltipInfo info={"Перейдите по ссылке Хеш Транзакции во вкладке LOGS Data requestld payment вы можете найти число сгенерированное Chainlink VRF"}/></h1>
             <div className={"w-[320px] md:w-[600px] flex flex-col border border-yellow-600 rounded-2xl"}>
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-yellow-600"}>
                 {currentStep >= 1 && (
