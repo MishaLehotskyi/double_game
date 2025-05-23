@@ -14,7 +14,7 @@ export default function RotatingModel({ fileName }: { fileName: string }) {
     <div className="w-full h-full">
       <Canvas
         orthographic
-        camera={{position: [0, 0, 100], zoom: 50}}
+        camera={{position: [0, 0, 100], zoom: 60}}
         onCreated={({gl}) => {
           gl.getContext().canvas.addEventListener("webglcontextlost", (e) => {
             e.preventDefault();
@@ -37,9 +37,7 @@ export default function RotatingModel({ fileName }: { fileName: string }) {
         />
 
         <Suspense fallback={null}>
-          <Bounds fit clip observe margin={1.2}>
-            <Model fileName={fileName} />
-          </Bounds>
+          <Model fileName={fileName} />
         </Suspense>
       </Canvas>
     </div>

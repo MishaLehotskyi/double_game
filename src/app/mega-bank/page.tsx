@@ -154,7 +154,7 @@ export default function StandardBank() {
             <h1>Учасники</h1>
             <p className="text-[60px] font-bold border border-yellow-600 rounded-2xl px-[15px]">10</p>
           </div>
-          <div className={"md:hidden h-[120px] w-[120px]"}>
+          <div className={"md:hidden h-[150px] w-[150px]"}>
             <RotatingModel fileName={"mega.glb"}/>
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
