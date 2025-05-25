@@ -20,6 +20,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Double Game",
   description: "Первый в мире токен лотерея",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
