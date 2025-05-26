@@ -7,13 +7,13 @@ import Link from 'next/link';
 
 export default function SidebarMenu() {
   const [open, setOpen] = useState(false);
-  const tabs: { label: string; href: string }[] = [
+  const tabs: { label: string; href: string; target?: boolean }[] = [
     { label: "Цена Токена DBE", href: "/price" },
     { label: "Дорожная карта проекта", href: "/roadmap" },
     { label: "Токеномика токена DBE", href: "/tokenomic" },
     { label: "О нас", href: "/about" },
     { label: "Контакты", href: "/contacts" },
-    { label: "Чат бот Telegram", href: "/telegram" },
+    { label: "Чат бот Telegram", href: "https://t.me/DobelGameBot", target: true },
   ];
 
   const toggle = () => setOpen(prev => !prev);
@@ -33,8 +33,8 @@ export default function SidebarMenu() {
         }`}
       >
         <ul className="p-[10px] space-y-2 bg-gray-700 rounded-2xl">
-          {tabs.map(({ label, href }) => (
-            <Link key={label} className="bg-gray-900 hover:bg-gray-800 cursor-pointer rounded-2xl px-[10px] h-[30px] flex items-center" href={href}>{label}</Link>
+          {tabs.map(({ label, href, target }) => (
+            <Link key={label} target={target ? "_blank" : "_self"} className="bg-gray-900 hover:bg-gray-800 cursor-pointer rounded-2xl px-[10px] h-[30px] flex items-center" href={href}>{label}</Link>
           ))}
         </ul>
       </div>

@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import Link from "next/link";
 
-const navItems: { label: string; href: string }[] = [
+const navItems: { label: string; href: string; target?: boolean }[] = [
   { label: "ГЛАВНАЯ", href: "/" },
   { label: "МИНИ БАНК", href: "/mini-bank" },
   { label: "СТАНДАРТ БАНК", href: "/standard-bank" },
@@ -14,7 +14,7 @@ const navItems: { label: string; href: string }[] = [
   { label: "Токеномика токена DBE", href: "/tokenomic" },
   { label: "О нас", href: "/about" },
   { label: "Контакты", href: "/contacts" },
-  { label: "Чат бот Telegram", href: "/telegram" },
+  { label: "Чат бот Telegram", href: "https://t.me/DobelGameBot", target: true },
 ];
 
 export default function MobileMenu() {
@@ -49,10 +49,11 @@ export default function MobileMenu() {
             <CloseIcon />
           </button>
 
-          {navItems.map(({ label, href }) => (
+          {navItems.map(({ label, href, target }) => (
             <Link
               href={href}
               key={label}
+              target={target ? "_blank" : "_self"}
               className="hover:text-purple-500 transition text-base border rounded-full py-[5px] px-[10px] border-purple-900 shadow-[0_0_20px_5px_rgba(128,0,128,0.5)]"
               onClick={() => {
                 setOpen(false);
