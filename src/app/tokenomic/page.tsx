@@ -174,6 +174,14 @@ export default function Tokenomic() {
     }
   }, []);
 
+  useEffect(() => {
+    if (!document.getElementById('portal-root')) {
+      const portal = document.createElement('div');
+      portal.id = 'portal-root';
+      document.body.appendChild(portal);
+    }
+  }, []);
+
   if (isMobile === null) return null;
 
   return (

@@ -42,6 +42,14 @@ export default function StandardBank() {
     }
   }, [inView]);
 
+  useEffect(() => {
+    if (!document.getElementById('portal-root')) {
+      const portal = document.createElement('div');
+      portal.id = 'portal-root';
+      document.body.appendChild(portal);
+    }
+  }, []);
+
   return (
     <div className={"md:px-[80px] md:pt-[40px] pt-[50px] px-[10px] pb-[20px] flex flex-col justify-center gap-[20px] items-center"}>
       <div

@@ -6,6 +6,7 @@ import MobileMenu from "@/components/MobileMenu";
 import SidebarMenu from "@/components/SideBar";
 import React from "react";
 import Link from "next/link";
+import SessionModal from "@/components/SessionModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,6 +79,7 @@ export default function RootLayout({
         </header>
         <main>
           <SidebarMenu/>
+          <SessionModal />
           {children}
         </main>
       </body>

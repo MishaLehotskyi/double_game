@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import TelegramIcon from '@mui/icons-material/Telegram';
@@ -15,6 +15,12 @@ const contacts = [
     icon: EmailIcon,
     value: 'doubellgame@gmail.com',
     href: 'https://mailto:doubellgame@gmail.com',
+  },
+  {
+    label: 'Почта админа',
+    icon: EmailIcon,
+    value: 'admin@doubelgame.ru',
+    href: 'https://mailto:admin@doubelgame.ru',
   },
   {
     label: 'Twitter',
@@ -71,6 +77,14 @@ export default function ContactsPage() {
 
     document.body.removeChild(textarea);
   };
+
+  useEffect(() => {
+    if (!document.getElementById('portal-root')) {
+      const portal = document.createElement('div');
+      portal.id = 'portal-root';
+      document.body.appendChild(portal);
+    }
+  }, []);
 
   return (
     <div className="max-w-2xl mx-auto p-8">

@@ -1,6 +1,15 @@
-import React from "react";
+'use client'
+import React, {useEffect} from "react";
 
 export default function Roadmap () {
+  useEffect(() => {
+    if (!document.getElementById('portal-root')) {
+      const portal = document.createElement('div');
+      portal.id = 'portal-root';
+      document.body.appendChild(portal);
+    }
+  }, []);
+
   return (
     <div className={"md:px-[80px] px-[10px] flex flex-col justify-center gap-[20px]"}>
       <h1 className={"text-center pt-[15px] md:text-4xl"}>Дорожная карта 2025 - 2027</h1>

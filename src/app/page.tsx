@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -39,6 +39,14 @@ export default function Home(){
 
     document.body.removeChild(textarea);
   };
+
+  useEffect(() => {
+    if (!document.getElementById('portal-root')) {
+      const portal = document.createElement('div');
+      portal.id = 'portal-root';
+      document.body.appendChild(portal);
+    }
+  }, []);
 
   return (
     <div className={"md:px-[80px] px-[10px] flex flex-col justify-center gap-[20px]"}>
@@ -94,7 +102,7 @@ export default function Home(){
             rel="noopener noreferrer"
             className="hover:text-purple-600 transition-colors md:text-xl text-base"
           >
-            doubellgame@gmail.com
+            admin@doubelgame.ru
           </a>
         </div>
         <Tooltip title={copied ? 'Copied!' : 'Copy'}>

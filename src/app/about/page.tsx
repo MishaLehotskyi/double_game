@@ -1,8 +1,15 @@
 'use client'
-import React from "react";
+import React, {useEffect} from "react";
 import CustomSlider from "@/components/Slider";
 
 export default function About() {
+  useEffect(() => {
+    if (!document.getElementById('portal-root')) {
+      const portal = document.createElement('div');
+      portal.id = 'portal-root';
+      document.body.appendChild(portal);
+    }
+  }, []);
 
   return (
     <div className={"md:px-[80px] px-[10px] flex flex-col justify-center gap-[20px] items-center"}>
