@@ -97,7 +97,7 @@ export default function Home(){
         <div className="flex items-center gap-4 md:w-[320px] w-full md:text-xl text-base">
           Почта админа:
           <a
-            href={"https://mailto:doubellgame@gmail.com"}
+            href={"https://mailto:admin@doubelgame.ru"}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-purple-600 transition-colors md:text-xl text-base"
@@ -107,7 +107,7 @@ export default function Home(){
         </div>
         <Tooltip title={copied ? 'Copied!' : 'Copy'}>
           <IconButton
-            onClick={() => handleCopy("doubellgame@gmail.com")}
+            onClick={() => handleCopy("admin@doubelgame.ru")}
             size="small"
             sx={{color: '#6b7280'}}
           >
