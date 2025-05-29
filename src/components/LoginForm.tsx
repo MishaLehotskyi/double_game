@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { api } from '@/utils/api';
 import { useEffect, useState } from 'react';
 import {useAuth} from "@/contexts/AuthContext";
+import toast from "react-hot-toast";
 
 type Props = {
   onClose: () => void;
@@ -33,6 +34,9 @@ export const LoginForm = ({ onClose }: Props) => {
       const token = res.data.access_token;
       localStorage.setItem('access_token', token);
       login(token)
+      toast.success('Вы вошли!');
+    }).catch(() => {
+      toast.error('Неправильный email или пароль!');
     });
 
     onClose();

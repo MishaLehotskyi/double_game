@@ -8,6 +8,7 @@ import { AuthModalProvider } from "@/contexts/AuthModalContext";
 import { AuthProvider } from '@/contexts/AuthContext';
 import Header from "@/components/Header";
 import AuthModals from "@/components/AuthModals";
+import {ToasterProvider} from "@/components/ToasterProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
+        <ToasterProvider />
         <AuthModalProvider>
           <AuthProvider>
             <Header />

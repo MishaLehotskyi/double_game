@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { api } from '@/utils/api';
 import {useAuth} from "@/contexts/AuthContext";
+import toast from 'react-hot-toast';
 
 type Props = {
   onClose: () => void;
@@ -36,6 +37,13 @@ export const RegisterForm = ({ onClose }: Props) => {
       const token = res.data.access_token;
       localStorage.setItem('access_token', token);
       login(token)
+      toast.success('Регистрация успешна!');
+    }).catch((error) => {
+      if (error.status === 400) {
+        toast.error('Такой Email или Metamask уже зарегистрирован!');
+      } else {
+        toast.error('Произошла ошибка!');
+      }
     });
 
     onClose();

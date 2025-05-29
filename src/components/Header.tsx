@@ -28,7 +28,6 @@ export default function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(loading)
 
   return (
     <header
