@@ -19,7 +19,7 @@ export const RegisterForm = ({ onClose }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isSubmitted },
+    formState: { errors, isSubmitted },
   } = useForm<RegisterFormData>({
     mode: 'onSubmit',
   });
