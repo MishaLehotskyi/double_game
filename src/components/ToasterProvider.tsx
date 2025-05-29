@@ -3,5 +3,5 @@
 import { Toaster } from 'react-hot-toast';
 
 export const ToasterProvider = () => {
-  return <Toaster position="top-right" toastOptions={{ duration: 3000 }} />;
+  return <Toaster position="top-left" toastOptions={{ duration: 3000 }} />;
 };

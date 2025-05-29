@@ -93,7 +93,7 @@ export default function Header() {
                   Выйти
                 </MenuItem>
               </Menu>
-              <div className={"text-base md:text-xl"}>{user.email}</div>
+              <div className={"text-base md:text-xl w-[125px] md:w-full whitespace-nowrap overflow-hidden text-ellipsis"}>{user.email}</div>
             </>
 
           ) : (
