@@ -21,8 +21,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Double Game",
-  description: "Первый в мире токен лотерея",
+  title: "DoubelGame — двойная игра DBE",
+  description: "DoubelGame | токен DBE — блокчейн-лотерея | двойная лотерея | ДБЭ",
+  keywords: ["doublegame", "doubelgame",
+    "двойная игра", "двойная лотерея",
+    "DBE", "Токен DBE", "Токен ДБЭ", "ДБЭ",
+    "dabelgame", "dablgame", "dabeelgame",
+    "крипто игра", "крипто-лотерея", "блокчейн игра", "блокчейн лотерея",
+    "лотерея на токене", "игра на токене", "розыгрыш DBE"
+  ],
   icons: {
     icon: "/favicon.png",
   },
