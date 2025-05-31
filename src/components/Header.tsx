@@ -16,7 +16,7 @@ export default function Header() {
     { label: "СТАНДАРТ БАНК", href: "/standard-bank" },
     { label: "МЕГА БАНК", href: "/mega-bank" },
   ];
-  const { openLogin, openRegister } = useAuthModal();
+  const { openLogin, openRegister, openVerify } = useAuthModal();
   const { user, logout, loading } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -92,6 +92,14 @@ export default function Header() {
                 >
                   Выйти
                 </MenuItem>
+                {(user && !user.emailVerified) &&
+                    <MenuItem
+                      onClick={() => {
+                        openVerify(user.email)
+                      }}
+                    >
+                      Верифицировать почту
+                    </MenuItem>}
               </Menu>
               <div className={"text-base md:text-xl w-[125px] md:w-full whitespace-nowrap overflow-hidden text-ellipsis"}>{user.email}</div>
             </>

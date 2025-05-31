@@ -1,10 +1,10 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import { api } from '@/utils/api';
-import {useAuth} from "@/contexts/AuthContext";
 import toast from 'react-hot-toast';
+import {useAuthModal} from "@/contexts/AuthModalContext";
 
 type Props = {
   onClose: () => void;
@@ -24,7 +24,8 @@ export const RegisterForm = ({ onClose }: Props) => {
   } = useForm<RegisterFormData>({
     mode: 'onSubmit',
   });
-  const { login } = useAuth();
+
+  const { openVerify } = useAuthModal();
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -33,20 +34,18 @@ export const RegisterForm = ({ onClose }: Props) => {
   }, []);
 
   const onSubmit = async (data: RegisterFormData) => {
-    api.post('auth/register', data).then(res => {
-      const token = res.data.access_token;
-      localStorage.setItem('access_token', token);
-      login(token)
-      toast.success('Регистрация успешна!');
-    }).catch((error) => {
-      if (error.status === 400) {
-        toast.error('Такой Email или Metamask уже зарегистрирован!');
+    try {
+      await api.post('auth/register', data);
+      await api.post('auth/send-code', { email: data.email });
+      toast.success('Код отправлен на почту');
+      openVerify(data.email)
+    } catch (error: any) {
+      if (error?.response?.status === 400) {
+        toast.error('Такой Email или Metamask уже зарегистрирован');
       } else {
-        toast.error('Произошла ошибка!');
+        toast.error('Ошибка при регистрации');
       }
-    });
-
-    onClose();
+    }
   };
 
   if (!isMounted) return null;
@@ -107,7 +106,7 @@ export const RegisterForm = ({ onClose }: Props) => {
           type="submit"
           className="bg-purple-600 text-white hover:bg-purple-700 py-2 rounded-md w-full"
         >
-          Зарегистрироваться
+          Получить код
         </button>
       </form>
 
@@ -117,4 +116,3 @@ export const RegisterForm = ({ onClose }: Props) => {
     </div>
   );
 };
-

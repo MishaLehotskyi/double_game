@@ -7,6 +7,7 @@ type User = {
   id: string;
   email: string;
   metamaskId: string;
+  emailVerified: boolean;
 };
 
 type AuthContextType = {
