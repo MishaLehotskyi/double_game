@@ -38,7 +38,7 @@ export default function Header() {
           <Image src={"/doublegame.png"} alt={"doublegame"} height={80} width={80}/>
         </div>
         <a target={"_blank"}
-          href={"https://pancakeswap.finance/swap?outputCurrency=0xc1f021EA477323A26B587a7d8d4C408A9F0c0989&inputCurrency=0x55d398326f99059fF775485246999027B3197955"}
+          href={"https://pancakeswap.finance/swap?inputCurrency=0x55d398326f99059fF775485246999027B3197955&outputCurrency=0x86Aa748baC7BDe8Cd1A7bEf7236Ab4279554b6B6"}
           className={"bg-[#2a2a2a] border border-yellow-600 rounded-full shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] bg-yellow-600 md:p-[10px] md:text-2xl text-sm px-[5px] py-[10px]"}>Купить
           DBE</a>
       </div>
