@@ -12,6 +12,6 @@ export default function Price() {
   }, []);
 
   return (
-    <GeckoTerminalChart src="https://www.geckoterminal.com/bsc/pools/0x26cb8a2d69be6d305dd339a31b1b0ff19c78ce69?embed=1" />
+    <GeckoTerminalChart src="https://www.geckoterminal.com/uk/bsc/pools/0x4f47ac9f39a0f263d194b3480ea8eab63538a5a4?embed=1" />
   )
 }
