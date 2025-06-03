@@ -23,7 +23,7 @@ export const Modal = ({ children, onClose }: Props) => {
   return createPortal(
     <div className="fixed inset-0 z-50 bg-black/50 flex justify-center items-center" onClick={onClose}>
       <div
-        className="bg-[#2a2a2a] p-6 rounded-xl shadow-xl min-w-[300px]"
+        className="bg-[#2a2a2a] p-6 rounded-xl shadow-xl md:min-w-[300px] w-[350px]"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

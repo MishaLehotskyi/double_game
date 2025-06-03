@@ -16,7 +16,7 @@ export default function Header() {
     { label: "СТАНДАРТ БАНК", href: "/standard-bank" },
     { label: "МЕГА БАНК", href: "/mega-bank" },
   ];
-  const { openLogin, openRegister, openVerify } = useAuthModal();
+  const { openLogin, openRegister, openVerify, openBuy } = useAuthModal();
   const { user, logout, loading } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -39,8 +39,12 @@ export default function Header() {
         </div>
         <a target={"_blank"}
           href={"https://pancakeswap.finance/swap?inputCurrency=0x55d398326f99059fF775485246999027B3197955&outputCurrency=0x86Aa748baC7BDe8Cd1A7bEf7236Ab4279554b6B6"}
-          className={"bg-[#2a2a2a] border border-yellow-600 rounded-full shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] bg-yellow-600 md:p-[10px] md:text-2xl text-sm px-[5px] py-[10px]"}>Купить
+          className={"bg-[#2a2a2a] hidden md:block border border-yellow-600 rounded-full shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] bg-yellow-600 md:p-[10px] md:text-2xl text-sm px-[5px] py-[10px]"}>Купить
           DBE</a>
+        <div
+          onClick={openBuy}
+          className={"bg-[#2a2a2a] md:hidden border border-yellow-600 rounded-full shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] bg-yellow-600 md:p-[10px] md:text-2xl text-sm px-[5px] py-[10px]"}>Купить
+          DBE</div>
       </div>
       <nav className={"hidden md:block"}>
         <ul className={"flex flex-row gap-[50px]"}>

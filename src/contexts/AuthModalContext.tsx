@@ -5,9 +5,10 @@ import { createContext, useContext, useState } from 'react';
 type AuthModalContextType = {
   openLogin: () => void;
   openRegister: () => void;
+  openBuy: () => void;
   openVerify: (email: string) => void;
   close: () => void;
-  modal: 'login' | 'register' | 'verify' | null;
+  modal: 'login' | 'register' | 'verify' | 'buy' | null;
   email: string;
 };
 
@@ -20,11 +21,12 @@ export const useAuthModal = () => {
 };
 
 export const AuthModalProvider = ({ children }: { children: React.ReactNode }) => {
-  const [modal, setModal] = useState<'login' | 'register'| 'verify' | null>(null);
+  const [modal, setModal] = useState<'login' | 'register'| 'verify' | 'buy' | null>(null);
   const [email, setEmail] = useState('');
 
   const openLogin = () => setModal('login');
   const openRegister = () => setModal('register');
+  const openBuy = () => setModal('buy');
   const openVerify = (email: string) => {
     setModal('verify')
     setEmail(email)
@@ -32,7 +34,7 @@ export const AuthModalProvider = ({ children }: { children: React.ReactNode }) =
   const close = () => setModal(null);
 
   return (
-    <AuthModalContext.Provider value={{ openLogin, openRegister, openVerify, close, modal, email }}>
+    <AuthModalContext.Provider value={{ openLogin, openRegister, openVerify, close, openBuy, modal, email }}>
       {children}
     </AuthModalContext.Provider>
   );

@@ -5,6 +5,7 @@ import {LoginForm} from "@/components/LoginForm";
 import {RegisterForm} from "@/components/RegisterForm";
 import React from "react";
 import {VerifyForm} from "@/components/VerifyForm";
+import Buy from "@/components/Buy";
 
 export default function AuthModals() {
   const { modal, close } = useAuthModal();
@@ -24,6 +25,11 @@ export default function AuthModals() {
       {modal === 'verify' && (
         <Modal onClose={close}>
           <VerifyForm onClose={close} />
+        </Modal>
+      )}
+      {modal === 'buy' && (
+        <Modal onClose={close}>
+          <Buy onClose={close} />
         </Modal>
       )}
     </>
