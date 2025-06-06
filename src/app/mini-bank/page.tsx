@@ -65,7 +65,7 @@ export default function MiniBank() {
           <Tooltip
             open={open}
             onClick={handleClick}
-            title={"Для участия в лорее Mini Bank переведите 100 токенов DBE на адрес 0x62939d201C1c4beFbA34A1DFE85f35B64bc1BcfB Сеть BNB Smart Chain (BEP 20). После этого вы автоматически появитесь в окне участников с присвоенным номером билета"}
+            title={"Для участия в лотереи Mini Bank переведите 100 токенов DBE на адрес 0x62939d201C1c4beFbA34A1DFE85f35B64bc1BcfB Сеть BNB Smart Chain (BEP 20). После этого вы автоматически появитесь в окне участников с присвоенным номером билета"}
             disableFocusListener
             disableHoverListener
             disableTouchListener

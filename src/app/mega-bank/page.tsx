@@ -168,7 +168,7 @@ export default function StandardBank() {
           <Tooltip
             open={open}
             onClick={handleClick}
-            title={"Для участия в лорее Mega Bank переведите 500 токенов DBE на адрес 0x740B45a8E7C01AAFC6CD823e5a794F172eE9cCD0 Сеть BNB Smart Chain (BEP 20). После этого вы автоматически появитесь в окне участников с присвоенным номером билета"}
+            title={"Для участия в лотереи Mega Bank переведите 500 токенов DBE на адрес 0x740B45a8E7C01AAFC6CD823e5a794F172eE9cCD0 Сеть BNB Smart Chain (BEP 20). После этого вы автоматически появитесь в окне участников с присвоенным номером билета"}
             disableFocusListener
             disableHoverListener
             disableTouchListener
