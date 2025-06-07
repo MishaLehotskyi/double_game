@@ -12,7 +12,7 @@ export default function Home(){
   }, []);
 
   return (
-    <div className={"md:px-[80px] px-[10px] flex flex-col justify-center gap-[20px]"}>
+    <div className={"md:px-[80px] px-[10px] flex flex-col justify-center gap-[20px] bg-no-repeat bg-contain md:bg-repeat-y md:bg-left md:bg-[length:100%_auto] bg-[url('/back2.gif')]"}>
       <h1 className={"text-center pt-[15px] md:text-4xl"}>DoubelGame это прозрачная и открытая DeXe лотерея, где
         победителей выбирает генератор случайных чисел <a href={"https://docs.chain.link/vrf"} target={"_blank"}
         className={"text-purple-700 cursor-pointer"}>Chainlink VRF</a>
