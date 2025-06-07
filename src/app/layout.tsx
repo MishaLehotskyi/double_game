@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "лотерея на токене", "игра на токене", "розыгрыш DBE"
   ],
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon.svg",
   },
 };
 
