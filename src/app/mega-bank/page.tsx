@@ -66,7 +66,6 @@ export default function StandardBank() {
 
   useEffect(() => {
     api.get('game/latest/MEGA').then((res) => {
-      console.log(res.data.winners)
       setTickets(res.data.tickets)
       setWinners(res.data.winners.map((el: { number: string; transactionHash: string }) => ({
         number: +el.number,
@@ -85,12 +84,10 @@ export default function StandardBank() {
     })
 
     socket.on('new-ticket', (ticket) => {
-      console.log('🎟 Новый билет:', ticket)
       setTickets((prev) => [...prev, ticket])
     })
 
-    socket.on('game-status-changed', ({ gameId, newStatus, number, transactionHash }) => {
-      console.log(`🎯 Game ${gameId} → Status: ${newStatus}`);
+    socket.on('game-status-changed', ({ number, transactionHash }) => {
       setWinners(prev => [...prev, {number: +number, transactionHash }]);
       setCurrentStep(prev => prev + 1);
     });
