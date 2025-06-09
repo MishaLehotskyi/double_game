@@ -21,7 +21,10 @@ const ERC20_ABI = [
   'function decimals() view returns (uint8)',
 ]
 
-const socket = io(process.env.NEXT_PUBLIC_API_URL);
+const socket = io(process.env.NEXT_PUBLIC_API_URL, {
+  path: '/socket.io',
+  transports: ['websocket'],
+});
 
 export default function StandardBank() {
   const { ref, inView } = useInView({
