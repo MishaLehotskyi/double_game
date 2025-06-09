@@ -23,7 +23,7 @@ const ERC20_ABI = [
   'function decimals() view returns (uint8)',
 ]
 
-const socket = io(process.env.NEXT_PUBLIC_API_URL, {
+const socket = io(process.env.NEXT_WS, {
   path: '/socket.io',
   transports: ['websocket'],
 });
