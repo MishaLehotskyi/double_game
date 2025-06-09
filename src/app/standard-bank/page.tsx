@@ -55,7 +55,6 @@ export default function StandardBank() {
       const amount = ethers.parseUnits('500', decimals)
 
       const tx = await token.transfer(RECEIVER_ADDRESS, amount)
-      toast.success('Транзакция отправлена: ' + tx.hash)
 
       await tx.wait()
       toast.success('Успешно отправлено!')
