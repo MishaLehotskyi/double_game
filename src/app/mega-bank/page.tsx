@@ -6,109 +6,22 @@ import ClickableTooltipInfo from "@/components/ClickableTooltipInfo";
 import RotatingModel from "@/components/RotatingModel";
 import {IconButton, Tooltip} from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
+import {ethers} from "ethers";
+import toast from "react-hot-toast";
+import {api} from "@/utils/api";
+import {Ticket} from "@/types/Ticket";
+import {useAuth} from "@/contexts/AuthContext";
+import { io } from 'socket.io-client'
 const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
-const wallets = [
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E00",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E01",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E02",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E03",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E04",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E05",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E06",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E07",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E08",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E09",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0a",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0b",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0c",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0d",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0e",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E0f",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E10",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E11",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E12",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E13",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E14",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E15",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E16",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E17",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E18",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E19",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1a",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1b",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1c",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1d",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1e",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E1f",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E20",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E21",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E22",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E23",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E24",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E25",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E26",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E27",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E28",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E29",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2a",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2b",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2c",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2d",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2e",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E2f",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E30",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E31",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E32",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E33",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E34",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E35",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E36",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E37",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E38",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E39",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3a",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3b",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3c",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3d",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3e",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E3f",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E40",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E41",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E42",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E43",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E44",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E45",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E46",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E47",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E48",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E49",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4a",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4b",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4c",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4d",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4e",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E4f",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E50",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E51",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E52",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E53",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E54",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E55",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E56",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E57",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E58",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E59",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5a",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5b",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5c",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5d",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5e",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E5f",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E60",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E61",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E62",
-  "0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6E63"
+const DBE_TOKEN_ADDRESS = '0x86Aa748baC7BDe8Cd1A7bEf7236Ab4279554b6B6'
+const RECEIVER_ADDRESS = '0x740B45a8E7C01AAFC6CD823e5a794F172eE9cCD0'
+
+const ERC20_ABI = [
+  'function transfer(address to, uint amount) public returns (bool)',
+  'function decimals() view returns (uint8)',
 ]
+
+const socket = io(process.env.NEXT_PUBLIC_API_URL);
 
 export default function StandardBank() {
   const { ref, inView } = useInView({
@@ -116,33 +29,83 @@ export default function StandardBank() {
     threshold: 0.5,
   });
   const [open, setOpen] = useState(false);
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent)
+  const [tickets, setTickets] = useState<Ticket[]>([]);
+  const { user } = useAuth();
+  const [winners, setWinners] = useState<{number: number, transactionHash: string}[]>([]);
 
-  const handleClick = (event: React.MouseEvent) => {
+  const handleClick = async (event: React.MouseEvent) => {
     event.stopPropagation();
     setOpen(prev => !prev);
+    if (isIOS) {
+      return
+    }
+    if (!(window as any).ethereum) return toast.error('Установите MetaMask')
+
+    const provider = new ethers.BrowserProvider((window as any).ethereum)
+    const signer = await provider.getSigner()
+
+    const token = new ethers.Contract(DBE_TOKEN_ADDRESS, ERC20_ABI, signer)
+
+    try {
+      const decimals = await token.decimals()
+      const amount = ethers.parseUnits('500', decimals)
+
+      const tx = await token.transfer(RECEIVER_ADDRESS, amount)
+      toast.success('Транзакция отправлена: ' + tx.hash)
+
+      await tx.wait()
+      toast.success('Успешно отправлено!')
+    } catch (err: any) {
+      toast.error('Ошибка: не удалось отправить токены')
+    }
   };
 
   const [playCounter, setPlayCounter] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
-    if (inView) {
+    api.get('game/latest/MEGA').then((res) => {
+      console.log(res.data.winners)
+      setTickets(res.data.tickets)
+      setWinners(res.data.winners.map((el: { number: string; transactionHash: string }) => ({
+        number: +el.number,
+        transactionHash: el.transactionHash,
+      })))
+      switch (res.data.status) {
+      case 'open':
+        return setCurrentStep(0)
+      case 'first_number':
+        return setCurrentStep(1)
+      case 'second_number':
+        return setCurrentStep(2)
+      case 'finished':
+        return setCurrentStep(3)
+      }
+    })
+
+    socket.on('new-ticket', (ticket) => {
+      console.log('🎟 Новый билет:', ticket)
+      setTickets((prev) => [...prev, ticket])
+    })
+
+    socket.on('game-status-changed', ({ gameId, newStatus, number, transactionHash }) => {
+      console.log(`🎯 Game ${gameId} → Status: ${newStatus}`);
+      setWinners(prev => [...prev, {number: +number, transactionHash }]);
       setCurrentStep(prev => prev + 1);
-      setTimeout(() => {
-        setCurrentStep(prev => prev + 1);
-        setTimeout(() => {
-          setCurrentStep(prev => prev + 1);
-          setTimeout(() => {
-            setCurrentStep(prev => prev + 1);
-            setTimeout(() => {
-              setCurrentStep(prev => prev + 1);
-              setPlayCounter(true);
-            }, 1000)
-          }, 1000)
-        }, 1000)
-      }, 1000)
+    });
+
+    return () => {
+      socket.off('new-ticket')
+      socket.off('game-status-changed')
     }
-  }, [inView]);
+  }, []);
+
+  useEffect(() => {
+    if (inView && currentStep == 3) {
+      setPlayCounter(true)
+    }
+  }, [inView, currentStep]);
 
   useEffect(() => {
     if (!document.getElementById('portal-root')) {
@@ -188,15 +151,19 @@ export default function StandardBank() {
         </div>
         <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <p>Учасники</p>
-            <p className="text-[60px] font-bold border border-yellow-600 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">{wallets.length}</p>
+            <p className={"text-base md:text-xl"} >Учасники</p>
+            <p className="text-[60px] font-bold border border-yellow-600 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">{tickets.length}</p>
           </div>
           <div className={"md:hidden h-[150px] w-[150px]"}>
             <RotatingModel fileName={"mega.glb"}/>
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <p className={"text-base"} >Ваш номер</p>
-            <p className="text-[60px] font-bold border border-yellow-600 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">59</p>
+            <p className={"text-base md:text-xl"} >Ваш номер</p>
+            {user !== null && tickets.findIndex(t => t.metamaskId.toLowerCase() === user.metamaskId.toLowerCase()) !== -1
+              ? <p
+                className="text-[60px] font-bold border border-yellow-600 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">{tickets.findIndex(t => t.metamaskId.toLowerCase() === user.metamaskId.toLowerCase()) + 1}</p>
+              : <p
+                className="text-sm border border-yellow-600 rounded-2xl md:px-[15px] p-[5px] max-w-[100px] text-center">У вас пока нет номера билета</p>}
           </div>
         </div>
         <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>
@@ -204,35 +171,38 @@ export default function StandardBank() {
             info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"}/></h1>
           <div
             className={"border border-yellow-600 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
-            {wallets.map((wallet, index) => (
-              <div key={wallet} className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-                <p>{wallet}</p>
+            {tickets.length > 0 && tickets.map((ticket, index) => (
+              <div key={ticket.id} className={`flex justify-center text-[15px] md:text-[20px] gap-[15px] ${user?.metamaskId && ticket.metamaskId.toLowerCase() === user.metamaskId.toLowerCase() ? 'bg-yellow-600 rounded-2xl px-[5px]' : ''}`}>
+                <p>{ticket.metamaskId}</p>
                 -
                 <p>№ {index + 1}</p>
               </div>
             ))}
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1 className={"text-center text-xl md:text-3xl"}>Генератор выиграшных номеров ChainlinkVRF<ClickableTooltipInfo
+            <h1 className={"text-center text-xl md:text-3xl"}>Генератор выигрышных номеров ChainlinkVRF<ClickableTooltipInfo
               info={"Перейдите по ссылке Хеш Транзакции во вкладке LOGS Data requestld payment вы можете найти число сгенерированное Chainlink VRF"}/>
             </h1>
             <div className={"w-[320px] md:w-[600px] flex flex-col border border-yellow-600 rounded-2xl"}>
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-yellow-600"}>
-                {currentStep >= 1 && (
+                {tickets.length === 100 && (
                   <p className={"text-[15px] md:text-[20px]"}>Старт трех запросов CHAINLINK VRF...</p>)}
+                {currentStep >= 1 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Первое число {winners[0].number}. <a
+                    href={`https://bscscan.com/tx/${winners[0].transactionHash}`}
+                    target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 2 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Первое число 59. <a
-                    href={"https://bscscan.com/tx/0xb318e6b7104706eb4c71aa1dcd30d5b8ebc7f709de2d328f6fcb5c3e36b20822"}
+                  <p className={"text-[15px] md:text-[20px]"}>Второе число {winners[1].number}. <a
+                    href={`https://bscscan.com/tx/${winners[1].transactionHash}`}
                     target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 3 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Второе число 86. <a
-                    href={"https://bscscan.com/tx/0xb7f04a3a11f4a3061944215dfe46c28685f1968ec1d11bbff331ac81bbb387b3"}
-                    target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
-                {currentStep >= 4 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Третье число 81. <a
-                    href={"https://bscscan.com/tx/0x648e13fb3a0305e135ca62460dbf47492d8404b52a83ca8083698354e5c32064"}
-                    target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
-                {currentStep >= 5 && (<p className={"text-[15px] md:text-[20px]"}>Отображение результатов</p>)}
+                  <>
+                    <p className={"text-[15px] md:text-[20px]"}>Третье число {winners[2].number}. <a
+                      href={`https://bscscan.com/tx/${winners[2].transactionHash}`}
+                      target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>
+                    <p className={"text-[15px] md:text-[20px]"}>Отображение результатов</p>
+                  </>
+                )}
               </div>
               <div
                 ref={ref}
@@ -240,7 +210,7 @@ export default function StandardBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-yellow-500 font-bold px-[15px]">1</p>
                   {playCounter && (<SlotCounter
-                    value={59}
+                    value={winners[0].number}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
@@ -249,7 +219,7 @@ export default function StandardBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-gray-400 font-bold px-[15px]">2</p>
                   {playCounter && (<SlotCounter
-                    value={86}
+                    value={winners[1].number}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
@@ -258,7 +228,7 @@ export default function StandardBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-amber-700 font-bold px-[15px]">3</p>
                   {playCounter && (<SlotCounter
-                    value={81}
+                    value={winners[2].number}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}

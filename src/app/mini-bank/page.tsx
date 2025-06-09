@@ -5,10 +5,25 @@ import { useInView } from "react-intersection-observer";
 import ClickableTooltipInfo from "@/components/ClickableTooltipInfo";
 import {IconButton, Tooltip} from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
+import {ethers} from "ethers";
+import toast from "react-hot-toast";
+import {api} from "@/utils/api";
+import {Ticket} from "@/types/Ticket";
+import {useAuth} from "@/contexts/AuthContext";
+import { io } from 'socket.io-client'
 const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
 const RotatingModel = dynamic(() => import('@/components/RotatingModel'), {
-  ssr: false, // 3D работает только на клиенте
+  ssr: false,
 });
+const DBE_TOKEN_ADDRESS = '0x86Aa748baC7BDe8Cd1A7bEf7236Ab4279554b6B6'
+const RECEIVER_ADDRESS = '0x62939d201C1c4beFbA34A1DFE85f35B64bc1BcfB'
+
+const ERC20_ABI = [
+  'function transfer(address to, uint amount) public returns (bool)',
+  'function decimals() view returns (uint8)',
+]
+
+const socket = io(process.env.NEXT_PUBLIC_API_URL);
 
 export default function MiniBank() {
   const { ref, inView } = useInView({
@@ -16,33 +31,83 @@ export default function MiniBank() {
     threshold: 0.5,
   });
   const [open, setOpen] = useState(false);
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent)
+  const [tickets, setTickets] = useState<Ticket[]>([]);
+  const { user } = useAuth();
+  const [winners, setWinners] = useState<{number: number, transactionHash: string}[]>([]);
 
-  const handleClick = (event: React.MouseEvent) => {
+  const handleClick = async (event: React.MouseEvent) => {
     event.stopPropagation();
     setOpen((prev) => !prev);
+    if (isIOS) {
+      return
+    }
+    if (!(window as any).ethereum) return toast.error('Установите MetaMask')
+
+    const provider = new ethers.BrowserProvider((window as any).ethereum)
+    const signer = await provider.getSigner()
+
+    const token = new ethers.Contract(DBE_TOKEN_ADDRESS, ERC20_ABI, signer)
+
+    try {
+      const decimals = await token.decimals()
+      const amount = ethers.parseUnits('100', decimals)
+
+      const tx = await token.transfer(RECEIVER_ADDRESS, amount)
+      toast.success('Транзакция отправлена: ' + tx.hash)
+
+      await tx.wait()
+      toast.success('Успешно отправлено!')
+    } catch (err: any) {
+      toast.error('Ошибка: не удалось отправить токены')
+    }
   };
 
   const [playCounter, setPlayCounter] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
-    if (inView) {
+    api.get('game/latest/MINI').then((res) => {
+      console.log(res.data.winners)
+      setTickets(res.data.tickets)
+      setWinners(res.data.winners.map((el: { number: string; transactionHash: string }) => ({
+        number: +el.number,
+        transactionHash: el.transactionHash,
+      })))
+      switch (res.data.status) {
+      case 'open':
+        return setCurrentStep(0)
+      case 'first_number':
+        return setCurrentStep(1)
+      case 'second_number':
+        return setCurrentStep(2)
+      case 'finished':
+        return setCurrentStep(3)
+      }
+    })
+
+    socket.on('new-ticket', (ticket) => {
+      console.log('🎟 Новый билет:', ticket)
+      setTickets((prev) => [...prev, ticket])
+    })
+
+    socket.on('game-status-changed', ({ gameId, newStatus, number, transactionHash }) => {
+      console.log(`🎯 Game ${gameId} → Status: ${newStatus}`);
+      setWinners(prev => [...prev, {number: +number, transactionHash }]);
       setCurrentStep(prev => prev + 1);
-      setTimeout(() => {
-        setCurrentStep(prev => prev + 1);
-        setTimeout(() => {
-          setCurrentStep(prev => prev + 1);
-          setTimeout(() => {
-            setCurrentStep(prev => prev + 1);
-            setTimeout(() => {
-              setCurrentStep(prev => prev + 1);
-              setPlayCounter(true);
-            }, 1000)
-          }, 1000)
-        }, 1000)
-      }, 1000)
+    });
+
+    return () => {
+      socket.off('new-ticket')
+      socket.off('game-status-changed')
     }
-  }, [inView]);
+  }, []);
+
+  useEffect(() => {
+    if (inView && currentStep == 3) {
+      setPlayCounter(true)
+    }
+  }, [inView, currentStep]);
 
   useEffect(() => {
     if (!document.getElementById('portal-root')) {
@@ -85,15 +150,19 @@ export default function MiniBank() {
         </div>
         <div className={"flex md:justify-evenly justify-between items-center w-full px-[15px]"}>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <p>Учасники</p>
-            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">10</p>
+            <p className={"text-base md:text-xl"}>Учасники</p>
+            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl md:px-[15px] px-[5px] min-w-[70px] text-center">{tickets.length}</p>
           </div>
           <div className={"md:hidden h-[150px] w-[150px]"}>
             <RotatingModel fileName={"mini.glb"} />
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <p className={"text-base"} >Ваш номер</p>
-            <p className="text-[60px] font-bold border border-orange-500 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">5</p>
+            <p className={"text-base md:text-xl"} >Ваш номер</p>
+            {user !== null && tickets.findIndex(t => t.metamaskId.toLowerCase() === user.metamaskId.toLowerCase()) !== -1
+              ? <p
+                className="text-[60px] font-bold border border-orange-500 rounded-2xl md:px-[15px] px-[5px] min-w-[80px] text-center">{tickets.findIndex(t => t.metamaskId.toLowerCase() === user.metamaskId.toLowerCase()) + 1}</p>
+              : <p
+                className="text-sm border border-orange-500 rounded-2xl md:px-[15px] p-[5px] max-w-[100px] text-center">У вас пока нет номера билета</p>}
           </div>
         </div>
         <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>
@@ -101,78 +170,38 @@ export default function MiniBank() {
             info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"}/></h1>
           <div
             className={"border border-orange-500 md:w-[500px] md:h-[200px] h-[120px] p-[10px] overflow-x-hidden overflow-y-auto scrollbar-custom"}>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xB2E0A4641F2CA075DC26BAB15dc1fAc88F017c0D</p>
-              -
-              <p>№ 4</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x3A9F53aA378bbDAA8E9C775942D4D8B8Ef7Fb92C</p>
-              -
-              <p>№ 6</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x1B4D7c960eE0D4998625F9F24DfA1769e8419D2D</p>
-              -
-              <p>№ 7</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xE618fC29d4098773Fc7f99b16849bAA9a2785A7A</p>
-              -
-              <p>№ 8</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x8aF23845a4c2077e09c64066F20e213243F85Db9</p>
-              -
-              <p>№ 9</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6EdA</p>
-              -
-              <p>№ 5</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x490FA1b7E4aDbDc77A7C3d9D8c14a37a6bC0Af2c</p>
-              -
-              <p>№ 3</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xd1C50B3Bd70C3BAEAFdDe21D558A878ABDf8aAbC</p>
-              -
-              <p>№ 1</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0x490FA1b7E4aDbDc77A7C3d9D8c14a37a6bC0Af2c</p>
-              -
-              <p>№ 2</p>
-            </div>
-            <div className={"flex justify-center text-[15px] md:text-[20px] gap-[15px]"}>
-              <p>0xC3c6C77D0f43cF6Df1944727eDE0D9C91E4A6EdA</p>
-              -
-              <p>№ 10</p>
-            </div>
+            {tickets.length > 0 && tickets.map((ticket, index) => (
+              <div key={ticket.id} className={`flex justify-center text-[15px] md:text-[20px] gap-[15px] ${user?.metamaskId && ticket.metamaskId.toLowerCase() === user.metamaskId.toLowerCase() ? 'bg-orange-500 rounded-2xl px-[5px]' : ''}`}>
+                <p>{ticket.metamaskId}</p>
+                -
+                <p>№ {index + 1}</p>
+              </div>
+            ))}
           </div>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
-            <h1 className={"text-center w-[320px] md:w-full text-xl md:text-3xl"}>Генератор выиграшных номеров ChainlinkVRF<ClickableTooltipInfo
+            <h1 className={"text-center w-[320px] md:w-full text-xl md:text-3xl"}>Генератор выигрышных номеров ChainlinkVRF<ClickableTooltipInfo
               info={"Перейдите по ссылке Хеш Транзакции во вкладке LOGS Data requestld payment вы можете найти число сгенерированное Chainlink VRF"}/>
             </h1>
             <div className={"w-[320px] md:w-[600px] flex flex-col border border-orange-500 rounded-2xl"}>
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-orange-500"}>
-                {currentStep >= 1 && (
+                {tickets.length === 10 && (
                   <p className={"text-[15px] md:text-[20px]"}>Старт трех запросов CHAINLINK VRF...</p>)}
+                {currentStep >= 1 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Первое число {winners[0].number}. <a
+                    href={`https://bscscan.com/tx/${winners[0].transactionHash}`}
+                    target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 2 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Первое число 1. <a
-                    href={"https://bscscan.com/tx/0xae18ddfb738519db08dc143b1cde8338ddbd7870671c3ae525e80d57e28b4323"}
+                  <p className={"text-[15px] md:text-[20px]"}>Второе число {winners[1].number}. <a
+                    href={`https://bscscan.com/tx/${winners[1].transactionHash}`}
                     target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
                 {currentStep >= 3 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Второе число 5. <a
-                    href={"https://bscscan.com/tx/0x4f66bdbae02cd4b8eecfad3b25f2ed2f733b67e772fbdbbeddba87f18a86220f"}
-                    target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
-                {currentStep >= 4 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Третье число 4. <a
-                    href={"https://bscscan.com/tx/0x5e2748bc9ad5f0c935558482f9b820abd57e670c25a991a1b7322e26d1f5e3b1"}
-                    target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>)}
-                {currentStep >= 5 && (<p className={"text-[15px] md:text-[20px]"}>Отображение результатов</p>)}
+                  <>
+                    <p className={"text-[15px] md:text-[20px]"}>Третье число {winners[2].number}. <a
+                      href={`https://bscscan.com/tx/${winners[2].transactionHash}`}
+                      target={"_blank"} className={"text-orange-500 cursor-pointer"}>Хэш транзакции</a></p>
+                    <p className={"text-[15px] md:text-[20px]"}>Отображение результатов</p>
+                  </>
+                )}
               </div>
               <div
                 ref={ref}
@@ -180,7 +209,7 @@ export default function MiniBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-yellow-500 font-bold px-[15px]">1</p>
                   {playCounter && (<SlotCounter
-                    value={1}
+                    value={winners[0].number}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
@@ -189,7 +218,7 @@ export default function MiniBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-gray-400 font-bold px-[15px]">2</p>
                   {playCounter && (<SlotCounter
-                    value={5}
+                    value={winners[1].number}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
@@ -198,7 +227,7 @@ export default function MiniBank() {
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="text-[60px] text-amber-700 font-bold px-[15px]">3</p>
                   {playCounter && (<SlotCounter
-                    value={4}
+                    value={winners[2].number}
                     duration={2}
                     containerClassName="text-[60px] font-bold px-[15px]"
                   />)}
