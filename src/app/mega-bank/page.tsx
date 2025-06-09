@@ -57,6 +57,7 @@ export default function StandardBank() {
       await tx.wait()
       toast.success('Успешно отправлено!')
     } catch (err: any) {
+      console.log(err.message)
       toast.error('Ошибка: не удалось отправить токены')
     }
   };

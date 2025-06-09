@@ -58,7 +58,8 @@ export default function MiniBank() {
 
       await tx.wait()
       toast.success('Успешно отправлено!')
-    } catch (err: any) {
+    } catch (error: any) {
+      console.log(error.message)
       toast.error('Ошибка: не удалось отправить токены')
     }
   };
