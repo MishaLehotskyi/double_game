@@ -34,7 +34,6 @@ export default function MiniBank() {
     threshold: 0.5,
   });
   const [open, setOpen] = useState(false);
-  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent)
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const { user } = useAuth();
   const [winners, setWinners] = useState<{number: number, transactionHash: string}[]>([]);
@@ -42,9 +41,6 @@ export default function MiniBank() {
   const handleClick = async (event: React.MouseEvent) => {
     event.stopPropagation();
     setOpen((prev) => !prev);
-    if (isIOS) {
-      return
-    }
     if (!(window as any).ethereum) return toast.error('Установите MetaMask')
 
     const provider = new ethers.BrowserProvider((window as any).ethereum)
