@@ -75,12 +75,14 @@ export default function StandardBank() {
       switch (res.data.status) {
       case 'open':
         return setCurrentStep(0)
-      case 'first_number':
+      case 'started':
         return setCurrentStep(1)
-      case 'second_number':
+      case 'first_number':
         return setCurrentStep(2)
-      case 'finished':
+      case 'second_number':
         return setCurrentStep(3)
+      case 'finished':
+        return setCurrentStep(4)
       }
     })
 
@@ -89,7 +91,9 @@ export default function StandardBank() {
     })
 
     socket.on('game-status-changed', ({ number, transactionHash }) => {
-      setWinners(prev => [...prev, {number: +number, transactionHash }]);
+      if (number && transactionHash) {
+        setWinners(prev => [...prev, {number: +number, transactionHash }]);
+      }
       setCurrentStep(prev => prev + 1);
     });
 
@@ -100,13 +104,13 @@ export default function StandardBank() {
   }, [startNewGame]);
 
   useEffect(() => {
-    if (inView && currentStep == 3) {
+    if (inView && currentStep == 4) {
       setPlayCounter(true)
     }
   }, [inView, currentStep]);
 
   useEffect(() => {
-    if (currentStep == 3) {
+    if (currentStep == 4) {
       setTimeout(() => {
         setStartNewGame(true)
       }, 3600000)
@@ -192,17 +196,17 @@ export default function StandardBank() {
             </h1>
             <div className={"w-[320px] md:w-[600px] flex flex-col border border-yellow-600 rounded-2xl"}>
               <div className={"w-full px-[15px] pt-[15px] h-[200px] border-b-1 border-yellow-600"}>
-                {tickets.length === 100 && (
-                  <p className={"text-[15px] md:text-[20px]"}>Старт трех запросов CHAINLINK VRF...</p>)}
                 {currentStep >= 1 && (
+                  <p className={"text-[15px] md:text-[20px]"}>Старт трех запросов CHAINLINK VRF...</p>)}
+                {currentStep >= 2 && (
                   <p className={"text-[15px] md:text-[20px]"}>Первое число {winners[0].number}. <a
                     href={`https://bscscan.com/tx/${winners[0].transactionHash}`}
                     target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
-                {currentStep >= 2 && (
+                {currentStep >= 3 && (
                   <p className={"text-[15px] md:text-[20px]"}>Второе число {winners[1].number}. <a
                     href={`https://bscscan.com/tx/${winners[1].transactionHash}`}
                     target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a></p>)}
-                {currentStep >= 3 && (
+                {currentStep >= 4 && (
                   <>
                     <p className={"text-[15px] md:text-[20px]"}>Третье число {winners[2].number}. <a
                       href={`https://bscscan.com/tx/${winners[2].transactionHash}`}
