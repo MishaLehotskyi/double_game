@@ -12,6 +12,7 @@ import {api} from "@/utils/api";
 import {Ticket} from "@/types/Ticket";
 import {useAuth} from "@/contexts/AuthContext";
 import { io } from 'socket.io-client'
+import Timer from "@/components/Timer";
 const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
 const DBE_TOKEN_ADDRESS = '0x86Aa748baC7BDe8Cd1A7bEf7236Ab4279554b6B6'
 const RECEIVER_ADDRESS = '0x0A59e974890265660BC9f3c2182e5cAA9c036723'
@@ -35,6 +36,7 @@ export default function StandardBank() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const { user } = useAuth();
   const [winners, setWinners] = useState<{number: number, transactionHash: string}[]>([]);
+  const [startNewGame, setStartNewGame] = useState<boolean>(false);
 
   const handleClick = async (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -95,13 +97,21 @@ export default function StandardBank() {
       socket.off('new-ticket')
       socket.off('game-status-changed')
     }
-  }, []);
+  }, [startNewGame]);
 
   useEffect(() => {
     if (inView && currentStep == 3) {
       setPlayCounter(true)
     }
   }, [inView, currentStep]);
+
+  useEffect(() => {
+    if (currentStep == 3) {
+      setTimeout(() => {
+        setStartNewGame(true)
+      }, 600000)
+    }
+  }, [currentStep]);
 
   useEffect(() => {
     if (!document.getElementById('portal-root')) {
@@ -162,6 +172,7 @@ export default function StandardBank() {
                 className="text-sm border border-green-600 rounded-2xl md:px-[15px] p-[5px] max-w-[100px] text-center">У вас пока нет номера билета</p>}
           </div>
         </div>
+        {currentStep >= 3 && (<p className={"text-xl md:text-3xl"} >Следующая игра через: <Timer color="green-600" miliseconds={600000} showHours={false} /></p>)}
         <div className={"flex flex-col justify-center items-center md:gap-[30px] gap-[15px]"}>
           <h1 className={"text-xl md:text-3xl"}>Строка новых участников <ClickableTooltipInfo
             info={"Приветствуем! Вы приняли участие в игре. Ваш номер билета указан напротив вашего кошелька"}/></h1>
