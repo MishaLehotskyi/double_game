@@ -112,7 +112,7 @@ export default function MiniBank() {
       const arr = res.data.map((el: any) => {
         const date = new Date(el.createdAt);
 
-        const pad = (n) => n.toString().padStart(2, "0");
+        const pad = (n: any) => n.toString().padStart(2, "0");
 
         const formatted =
           `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()} ` +
