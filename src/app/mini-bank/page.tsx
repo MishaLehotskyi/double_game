@@ -256,7 +256,7 @@ export default function MiniBank() {
                       />)
                       : (<SlotCounter
                         value={1}
-                        duration={30}
+                        duration={100000}
                         containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                       />)
                     : <></>
@@ -274,7 +274,7 @@ export default function MiniBank() {
                       />)
                       : (<SlotCounter
                         value={1}
-                        duration={40}
+                        duration={100000}
                         containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                       />)
                     : <></>
@@ -292,7 +292,7 @@ export default function MiniBank() {
                       />)
                       : (<SlotCounter
                         value={1}
-                        duration={50}
+                        duration={100000}
                         containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                       />)
                     : <></>
@@ -302,7 +302,7 @@ export default function MiniBank() {
             </div>
           </div>
           <div
-            className={"w-full md:w-[600px] md:h-[340px] h-[240px] rounded-full bg-cover bg-no-repeat md:bg-left md:bg-[length:100%_auto] bg-[url('/wheel.gif')]"}/>
+            className={"w-full md:w-[600px] md:h-[340px] h-[240px] rounded-full bg-cover bg-center bg-no-repeat md:bg-left md:bg-[length:100%_auto] bg-[url('/wheel.gif')]"}/>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1 className={"text-center text-xl md:text-3xl"}>Как проверить достоверность выигрышных чисел?</h1>
             <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-orange-500"}>
