@@ -145,13 +145,13 @@ export default function StandardBank() {
   }, []);
 
   return (
-    <div className={"md:px-[80px] md:pt-[40px] pt-[50px] px-[10px] pb-[20px] flex flex-col justify-center gap-[20px] items-center bg-contain bg-repeat-y md:bg-left md:bg-[length:100%_auto] bg-[url('/coins2.jpg')]"}>
+    <div className={"md:px-[80px] md:pt-[40px] pt-[50px] px-[10px] pb-[20px] flex flex-col justify-center gap-[20px] items-center bg-contain bg-repeat-y md:bg-left md:bg-[length:100%_auto] bg-[url('/coins3.jpg')]"}>
       <div
         className={"border border-yellow-600 rounded-2xl w-full md:py-[60px] py-[30px] flex flex-col items-center gap-[20px] relative"}>
         <div
-          className={"absolute hidden md:block top-[30px] left-[30px] h-[260px] w-[200px] bg-cover bg-[url('/mega-chest.jpg')]"}/>
+          className={"absolute hidden md:block top-[30px] left-[30px] h-[260px] w-[200px] bg-cover bg-[url('/mega-chest2.png')]"}/>
         <div
-          className={"absolute hidden md:block top-[30px] right-[30px] h-[260px] w-[200px] bg-cover bg-[url('/mega-chest.jpg')]"}/>
+          className={"absolute hidden md:block top-[30px] right-[30px] h-[260px] w-[200px] bg-cover bg-[url('/mega-chest2.png')]"}/>
         <div
           className={"flex justify-center absolute top-[-30px] bg-[#2a2a2a] border border-yellow-600 rounded-full shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] bg-yellow-600"}>
           <h1
@@ -300,7 +300,7 @@ export default function StandardBank() {
             </div>
           </div>
           <div
-            className={"w-full md:h-[600px] h-[240px] rounded-xl bg-contain bg-no-repeat md:bg-left md:bg-[length:100%_auto] bg-[url('/wheel.gif')]"}/>
+            className={"w-full md:w-[600px] md:h-[340px] h-[240px] rounded-full bg-cover bg-no-repeat md:bg-left md:bg-[length:100%_auto] bg-[url('/wheel.gif')]"}/>
           <div className={"flex flex-col justify-center items-center gap-[10px]"}>
             <h1 className={"text-center text-xl md:text-3xl"}>Как проверить достоверность выигрышных чисел?</h1>
             <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-yellow-600"}>
