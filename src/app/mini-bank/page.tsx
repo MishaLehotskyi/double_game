@@ -125,13 +125,13 @@ export default function MiniBank() {
   }, []);
 
   useEffect(() => {
-    if (inView && currentStep >= 1) {
+    if (inView && currentStep === 4) {
       setPlayCounter(true)
     }
   }, [inView, currentStep]);
 
   useEffect(() => {
-    if (currentStep == 4) {
+    if (currentStep === 4) {
       setTimeout(() => {
         setStartNewGame(true)
       }, 120000)
@@ -247,56 +247,32 @@ export default function MiniBank() {
                 <div className={"absolute top-[0px] left-[0px] md:h-[270px] w-full h-[150px] bg-no-repeat bg-cover bg-left bg-[length:100%_100%] bg-[url('/slot.png')]"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-yellow-500 font-bold px-[15px]">1</p>
-                  {playCounter
-                    ? winners.length > 0
-                      ? (<SlotCounter
-                        value={winners[0].number}
-                        duration={2}
-                        containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
-                      />)
-                      : (<SlotCounter
-                        value={1}
-                        duration={100}
-                        containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
-                      />)
-                    : <></>
-                  }
+                  {playCounter && (
+                    <SlotCounter
+                      value={winners[0].number}
+                      duration={2}
+                      containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
+                    />)}
                 </div>
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-gray-400 font-bold px-[15px]">2</p>
-                  {playCounter
-                    ? winners.length > 1
-                      ? (<SlotCounter
-                        value={winners[1].number}
-                        duration={2}
-                        containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
-                      />)
-                      : (<SlotCounter
-                        value={1}
-                        duration={100}
-                        containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
-                      />)
-                    : <></>
-                  }
+                  {playCounter && (
+                    <SlotCounter
+                      value={winners[1].number}
+                      duration={2}
+                      containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
+                    />)}
                 </div>
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-amber-700 font-bold px-[15px]">3</p>
-                  {playCounter
-                    ? winners.length > 2
-                      ? (<SlotCounter
-                        value={winners[2].number}
-                        duration={2}
-                        containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
-                      />)
-                      : (<SlotCounter
-                        value={1}
-                        duration={100}
-                        containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
-                      />)
-                    : <></>
-                  }
+                  {playCounter && (
+                    <SlotCounter
+                      value={winners[2].number}
+                      duration={2}
+                      containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
+                    />)}
                 </div>
               </div>
             </div>
