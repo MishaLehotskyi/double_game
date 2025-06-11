@@ -256,7 +256,7 @@ export default function MiniBank() {
                       />)
                       : (<SlotCounter
                         value={1}
-                        duration={100000}
+                        duration={100}
                         containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                       />)
                     : <></>
@@ -274,7 +274,7 @@ export default function MiniBank() {
                       />)
                       : (<SlotCounter
                         value={1}
-                        duration={100000}
+                        duration={100}
                         containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                       />)
                     : <></>
@@ -292,7 +292,7 @@ export default function MiniBank() {
                       />)
                       : (<SlotCounter
                         value={1}
-                        duration={100000}
+                        duration={100}
                         containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                       />)
                     : <></>
