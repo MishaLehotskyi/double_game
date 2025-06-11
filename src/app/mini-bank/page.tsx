@@ -133,6 +133,7 @@ export default function MiniBank() {
   useEffect(() => {
     if (currentStep === 4) {
       setTimeout(() => {
+        setPlayCounter(false)
         setStartNewGame(true)
       }, 120000)
     }

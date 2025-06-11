@@ -114,6 +114,7 @@ export default function StandardBank() {
   useEffect(() => {
     if (currentStep === 4) {
       setTimeout(() => {
+        setPlayCounter(false)
         setStartNewGame(true)
       }, 600000)
     }
