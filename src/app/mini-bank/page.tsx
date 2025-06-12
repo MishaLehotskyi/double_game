@@ -257,7 +257,7 @@ export default function MiniBank() {
                   {currentStep === 1 && (
                     <SlotCounter
                       value={1}
-                      duration={300}
+                      duration={30}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)
                   }
@@ -274,7 +274,7 @@ export default function MiniBank() {
                   {currentStep > 0 && currentStep < 3 && (
                     <SlotCounter
                       value={1}
-                      duration={300}
+                      duration={30}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)
                   }
@@ -291,7 +291,7 @@ export default function MiniBank() {
                   {currentStep > 0 && currentStep < 4 && (
                     <SlotCounter
                       value={1}
-                      duration={300}
+                      duration={30}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)
                   }
