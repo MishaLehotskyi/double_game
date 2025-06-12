@@ -319,13 +319,13 @@ export default function StandardBank() {
                       className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-yellow-600 shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
                       2) Место: <a
                         href={`https://bscscan.com/tx/${result.winners[1].payHash}`}
-                        target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 3500 DBE
+                        target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 7500 DBE
                     </p>
                     <p
                       className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-yellow-600 shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
                       3) Место: <a
                         href={`https://bscscan.com/tx/${result.winners[2].payHash}`}
-                        target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 1500 DBE
+                        target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 5000 DBE
                     </p>
                   </div>
                 </>
@@ -343,13 +343,13 @@ export default function StandardBank() {
                     className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-yellow-600 shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
                     2) Место: <a
                       href={"https://bscscan.com/tx/0xa8bf4e75e97e054729c8b64ce20869008d710e3e3095677147f4c5572e501bc4"}
-                      target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 3500 DBE
+                      target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 7500 DBE
                   </p>
                   <p
                     className={"md:w-[300px] w-[250px] md:text-xl text-base border-2 border-yellow-600 shadow-[0_0_20px_5px_rgba(255,215,0,0.5)] rounded-2xl p-[10px] transition-transform duration-300 hover:scale-110"}>
                     3) Место: <a
                       href={"https://bscscan.com/tx/0xa8bf4e75e97e054729c8b64ce20869008d710e3e3095677147f4c5572e501bc4"}
-                      target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 1500 DBE
+                      target={"_blank"} className={"text-yellow-600 cursor-pointer"}>Хэш транзакции</a> Сумма: 5000 DBE
                   </p>
                 </div>
               )}

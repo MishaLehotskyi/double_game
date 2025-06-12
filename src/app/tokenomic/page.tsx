@@ -159,8 +159,8 @@ const nodes = [
   { id: '5', type: 'doubleLeft', data: { label: 'Держатели токена DBE' }, position: { x: 400, y: 150 } },
   { id: '6', type: 'doubleTop', data: { label: 'DBE резерв' }, position: { x: 290, y: 230 } },
   { id: '7', type: 'customSecond', data: { label: 'Лотерея VRF' }, position: { x: 200, y: 300 } },
-  { id: '8', type: 'oneTopTarget', data: { label: '70% призовые' }, position: { x: 100, y: 380 } },
-  { id: '9', type: 'oneTopTarget', data: { label: '10% продвижение проекта, команда' }, position: { x: 320, y: 380 } },
+  { id: '8', type: 'oneTopTarget', data: { label: '85% призовые' }, position: { x: 100, y: 380 } },
+  { id: '9', type: 'oneTopTarget', data: { label: '5% продвижение проекта, команда' }, position: { x: 320, y: 380 } },
 ];
 
 export default function Tokenomic() {

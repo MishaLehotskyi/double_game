@@ -38,12 +38,12 @@ export default function Home(){
       </div>
       <ol className={"list-disc space-y-2 pl-[20px] md:pl-0 marker:text-purple-900"}>
         <li className={"md:text-xl text-base"}>Первое выпавшее число это 1 победитель забирающий 60% от банка</li>
-        <li className={"md:text-xl text-base"}>2 номер 7%</li>
-        <li className={"md:text-xl text-base"}>3 номер 3%</li>
-        <li className={"md:text-xl text-base"}>20 % от банка переходит в пул ликвидности токена DBE тем самым
+        <li className={"md:text-xl text-base"}>2 номер 15%</li>
+        <li className={"md:text-xl text-base"}>3 номер 10%</li>
+        <li className={"md:text-xl text-base"}>10 % от банка переходит в пул ликвидности токена DBE тем самым
           обеспечивает беспрерывный рост токена
         </li>
-        <li className={"md:text-xl text-base"}>10% от банка идет на развитие проекта и команду DobelGame</li>
+        <li className={"md:text-xl text-base"}>5% от банка идет на развитие проекта и команду DobelGame</li>
       </ol>
       <p className={"md:text-xl text-base"}>Держатели токена DBE имеют возможность отправлять его в стейкинг под 3% в
         месяц</p>
