@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { api } from '@/utils/api';
 import { useAuth } from '@/contexts/AuthContext';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import {useAuthModal} from "@/contexts/AuthModalContext";
 
 type Props = {

@@ -6,13 +6,14 @@ import ClickableTooltipInfo from "@/components/ClickableTooltipInfo";
 import {IconButton, Tooltip} from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import {ethers} from "ethers";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import {api} from "@/utils/api";
 import {Ticket} from "@/types/Ticket";
 import {useAuth} from "@/contexts/AuthContext";
 import { io } from 'socket.io-client'
 import Timer from "@/components/Timer";
 import {WinnerGame} from "@/types/Winner";
+import Copy from "@/components/Copy";
 const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
 const RotatingModel = dynamic(() => import('@/components/RotatingModel'), {
   ssr: false,
@@ -154,7 +155,7 @@ export default function MiniBank() {
           <Tooltip
             open={open}
             onClick={handleClick}
-            title={"Для участия в лотереи Mini Bank переведите 100 токенов DBE на адрес 0x62939d201C1c4beFbA34A1DFE85f35B64bc1BcfB Сеть BNB Smart Chain (BEP 20). После этого вы автоматически появитесь в окне участников с присвоенным номером билета"}
+            title={<p className={"text-[18px]"} >Для участия в лотереи Mini Bank переведите 100 токенов DBE на адрес <span className={"text-orange-500"} >0x62939d201C1c4beFbA34A1DFE85f35B64bc1BcfB</span><Copy text={"0x62939d201C1c4beFbA34A1DFE85f35B64bc1BcfB"} white={true} /><br/> Сеть BNB Smart Chain (BEP 20). После этого вы автоматически появитесь в окне участников с присвоенным номером билета</p>}
             disableFocusListener
             disableHoverListener
             disableTouchListener

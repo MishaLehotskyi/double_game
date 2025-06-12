@@ -4,7 +4,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Tooltip from "@mui/material/Tooltip";
 import React, {useState} from "react";
 
-export default function Copy({ text }: { text: string }) {
+export default function Copy({ text, white }: { text: string, white?: boolean }) {
   const [copied, setCopied] = useState<boolean>(false);
 
   const handleCopy = (value: string) => {
@@ -45,7 +45,7 @@ export default function Copy({ text }: { text: string }) {
       <IconButton
         onClick={() => handleCopy(text)}
         size="small"
-        sx={{color: '#6b7280'}}
+        sx={{color: white ? '#fff' : '#6b7280'}}
       >
         <ContentCopyIcon fontSize="small"/>
       </IconButton>

@@ -7,13 +7,14 @@ import RotatingModel from "@/components/RotatingModel";
 import {IconButton, Tooltip} from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import {ethers} from "ethers";
-import toast from "react-hot-toast";
+import { toast } from 'react-toastify';
 import {api} from "@/utils/api";
 import {Ticket} from "@/types/Ticket";
 import {useAuth} from "@/contexts/AuthContext";
 import { io } from 'socket.io-client'
 import Timer from "@/components/Timer";
 import {WinnerGame} from "@/types/Winner";
+import Copy from "@/components/Copy";
 const SlotCounter = dynamic(() => import('react-slot-counter'), { ssr: false });
 const DBE_TOKEN_ADDRESS = '0x86Aa748baC7BDe8Cd1A7bEf7236Ab4279554b6B6'
 const RECEIVER_ADDRESS = '0x740B45a8E7C01AAFC6CD823e5a794F172eE9cCD0'
@@ -155,7 +156,7 @@ export default function StandardBank() {
           <Tooltip
             open={open}
             onClick={handleClick}
-            title={"Для участия в лотереи Mega Bank переведите 500 токенов DBE на адрес 0x740B45a8E7C01AAFC6CD823e5a794F172eE9cCD0 Сеть BNB Smart Chain (BEP 20). После этого вы автоматически появитесь в окне участников с присвоенным номером билета"}
+            title={<p className={"text-[18px]"} >Для участия в лотереи Mega Bank переведите 500 токенов DBE на адрес <span className={"text-yellow-600"} >0x740B45a8E7C01AAFC6CD823e5a794F172eE9cCD0</span><Copy text={"0x740B45a8E7C01AAFC6CD823e5a794F172eE9cCD0"} white={true} /><br/> Сеть BNB Smart Chain (BEP 20). После этого вы автоматически появитесь в окне участников с присвоенным номером билета</p>}
             disableFocusListener
             disableHoverListener
             disableTouchListener
