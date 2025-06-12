@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SidebarMenu from "@/components/SideBar";
 import React from "react";
-import SessionModal from "@/components/SessionModal";
 import { AuthModalProvider } from "@/contexts/AuthModalContext";
 import { AuthProvider } from '@/contexts/AuthContext';
 import Header from "@/components/Header";
@@ -61,7 +60,6 @@ export default function RootLayout({
             <Header />
             <main>
               <SidebarMenu/>
-              <SessionModal/>
           
               {children}
               <AuthModals />
