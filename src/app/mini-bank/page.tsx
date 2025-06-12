@@ -31,7 +31,7 @@ const socket = io(process.env.NEXT_WS, {
 });
 
 export default function MiniBank() {
-  const { ref, inView } = useInView({
+  const { ref } = useInView({
     triggerOnce: true,
     threshold: 0.5,
   });
@@ -66,7 +66,6 @@ export default function MiniBank() {
     }
   };
 
-  const [playCounter, setPlayCounter] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
@@ -125,15 +124,8 @@ export default function MiniBank() {
   }, []);
 
   useEffect(() => {
-    if (inView && currentStep === 4) {
-      setPlayCounter(true)
-    }
-  }, [inView, currentStep]);
-
-  useEffect(() => {
     if (currentStep === 4) {
       setTimeout(() => {
-        setPlayCounter(false)
         setStartNewGame(true)
       }, 120000)
     }
@@ -248,7 +240,7 @@ export default function MiniBank() {
                 <div className={"absolute top-[0px] left-[0px] md:h-[270px] w-full h-[150px] bg-no-repeat bg-cover bg-left bg-[length:100%_100%] bg-[url('/slot.png')]"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-yellow-500 font-bold px-[15px]">1</p>
-                  {playCounter && (
+                  {currentStep > 1 && (
                     <SlotCounter
                       value={winners[0].number}
                       duration={2}
@@ -265,7 +257,7 @@ export default function MiniBank() {
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-gray-400 font-bold px-[15px]">2</p>
-                  {playCounter && (
+                  {currentStep > 2 && (
                     <SlotCounter
                       value={winners[1].number}
                       duration={2}
@@ -282,7 +274,7 @@ export default function MiniBank() {
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-amber-700 font-bold px-[15px]">3</p>
-                  {playCounter && (
+                  {currentStep > 3 && (
                     <SlotCounter
                       value={winners[2].number}
                       duration={2}
