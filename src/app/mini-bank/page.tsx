@@ -254,6 +254,13 @@ export default function MiniBank() {
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
+                  {currentStep === 1 && (
+                    <SlotCounter
+                      value={1}
+                      duration={300}
+                      containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
+                    />)
+                  }
                 </div>
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
@@ -264,6 +271,13 @@ export default function MiniBank() {
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
+                  {currentStep > 0 && currentStep < 3 && (
+                    <SlotCounter
+                      value={1}
+                      duration={300}
+                      containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
+                    />)
+                  }
                 </div>
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
@@ -274,6 +288,13 @@ export default function MiniBank() {
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
+                  {currentStep > 0 && currentStep < 4 && (
+                    <SlotCounter
+                      value={1}
+                      duration={300}
+                      containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
+                    />)
+                  }
                 </div>
               </div>
             </div>
