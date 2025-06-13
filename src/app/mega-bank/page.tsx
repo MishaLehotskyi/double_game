@@ -1,7 +1,6 @@
 'use client'
 import React, {useEffect, useRef, useState} from "react";
 import dynamic from 'next/dynamic';
-import { useInView } from "react-intersection-observer";
 import ClickableTooltipInfo from "@/components/ClickableTooltipInfo";
 import RotatingModel from "@/components/RotatingModel";
 import {IconButton, Tooltip} from "@mui/material";
