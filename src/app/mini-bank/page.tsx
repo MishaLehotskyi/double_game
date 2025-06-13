@@ -32,7 +32,7 @@ const socket = io(process.env.NEXT_WS, {
 });
 
 export default function MiniBank() {
-  const { ref } = useInView({
+  const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.5,
   });
@@ -91,7 +91,9 @@ export default function MiniBank() {
     })
 
     socket.on('new-ticket', (ticket) => {
-      setTickets((prev) => [...prev, ticket])
+      setTickets((prev) => {
+        return tickets.length < 10 ? [...prev, ticket] : [...prev]
+      })
     })
 
     socket.on('game-status-changed', ({ number, transactionHash }) => {
@@ -241,13 +243,13 @@ export default function MiniBank() {
                 <div className={"absolute top-[0px] left-[0px] md:h-[270px] w-full h-[150px] bg-no-repeat bg-cover bg-left bg-[length:100%_100%] bg-[url('/slot.png')]"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-yellow-500 font-bold px-[15px]">1</p>
-                  {currentStep > 1 && (
+                  {currentStep > 1 && inView && (
                     <SlotCounter
                       value={winners[0].number}
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
-                  {currentStep === 1 && (
+                  {currentStep === 1 && inView && (
                     <SlotCounter
                       value={1}
                       duration={30}
@@ -258,13 +260,13 @@ export default function MiniBank() {
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-gray-400 font-bold px-[15px]">2</p>
-                  {currentStep > 2 && (
+                  {currentStep > 2 && inView && (
                     <SlotCounter
                       value={winners[1].number}
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
-                  {currentStep > 0 && currentStep < 3 && (
+                  {currentStep > 0 && currentStep < 3 && inView && (
                     <SlotCounter
                       value={1}
                       duration={50}
@@ -275,13 +277,13 @@ export default function MiniBank() {
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-amber-700 font-bold px-[15px]">3</p>
-                  {currentStep > 3 && (
+                  {currentStep > 3 && inView && (
                     <SlotCounter
                       value={winners[2].number}
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
-                  {currentStep > 0 && currentStep < 4 && (
+                  {currentStep > 0 && currentStep < 4 && inView && (
                     <SlotCounter
                       value={1}
                       duration={60}
