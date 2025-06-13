@@ -1,7 +1,6 @@
 'use client'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import dynamic from 'next/dynamic';
-import { useInView } from "react-intersection-observer";
 import ClickableTooltipInfo from "@/components/ClickableTooltipInfo";
 import {IconButton, Tooltip} from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
@@ -32,11 +31,8 @@ const socket = io(process.env.NEXT_WS, {
 });
 
 export default function MiniBank() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.5,
-  });
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [results, setResults] = useState<WinnerGame[]>([]);
   const { user } = useAuth();
@@ -80,16 +76,31 @@ export default function MiniBank() {
       case 'open':
         return setCurrentStep(0)
       case 'started':
+        scrollToElement()
         return setCurrentStep(1)
       case 'first_number':
+        scrollToElement()
         return setCurrentStep(2)
       case 'second_number':
+        scrollToElement()
         return setCurrentStep(3)
       case 'finished':
         return setCurrentStep(4)
       }
     })
+  }, [startNewGame]);
 
+  const scrollToElement = () => {
+    if (ref.current) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+    }
+  };
+
+  useEffect(() => {
     socket.on('new-ticket', (ticket) => {
       setTickets((prev) => {
         return tickets.length < 10 ? [...prev, ticket] : [...prev]
@@ -107,7 +118,7 @@ export default function MiniBank() {
       socket.off('new-ticket')
       socket.off('game-status-changed')
     }
-  }, [startNewGame]);
+  }, [tickets.length])
 
   useEffect(() => {
     api.get('game/finished?type=MINI').then((res) => {
@@ -127,6 +138,9 @@ export default function MiniBank() {
   }, []);
 
   useEffect(() => {
+    if (currentStep === 1) {
+      scrollToElement()
+    }
     if (currentStep === 4) {
       setTimeout(() => {
         setStartNewGame(true)
@@ -243,13 +257,13 @@ export default function MiniBank() {
                 <div className={"absolute top-[0px] left-[0px] md:h-[270px] w-full h-[150px] bg-no-repeat bg-cover bg-left bg-[length:100%_100%] bg-[url('/slot.png')]"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-yellow-500 font-bold px-[15px]">1</p>
-                  {currentStep > 1 && inView && (
+                  {currentStep > 1 && (
                     <SlotCounter
                       value={winners[0].number}
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
-                  {currentStep === 1 && inView && (
+                  {currentStep === 1 && (
                     <SlotCounter
                       value={1}
                       duration={30}
@@ -260,13 +274,13 @@ export default function MiniBank() {
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-gray-400 font-bold px-[15px]">2</p>
-                  {currentStep > 2 && inView && (
+                  {currentStep > 2 && (
                     <SlotCounter
                       value={winners[1].number}
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
-                  {currentStep > 0 && currentStep < 3 && inView && (
+                  {currentStep > 0 && currentStep < 3 && (
                     <SlotCounter
                       value={1}
                       duration={50}
@@ -277,13 +291,13 @@ export default function MiniBank() {
                 <div className={"border border-orange-500 h-full"}></div>
                 <div className={"flex flex-col items-center justify-center md:gap-[15px]"}>
                   <p className="md:text-[60px] text-[30px] text-amber-700 font-bold px-[15px]">3</p>
-                  {currentStep > 3 && inView && (
+                  {currentStep > 3 && (
                     <SlotCounter
                       value={winners[2].number}
                       duration={2}
                       containerClassName="md:text-[60px] text-[30px] font-bold px-[15px]"
                     />)}
-                  {currentStep > 0 && currentStep < 4 && inView && (
+                  {currentStep > 0 && currentStep < 4 && (
                     <SlotCounter
                       value={1}
                       duration={60}
